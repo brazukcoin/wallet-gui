@@ -1,0 +1,24 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Brazukcoin
+GenericName=Brazukcoin wallet
+Name[uk]=Карбованeць
+Name[ru]=Карбованeц
+Name[pl]=Brazukcoinwaneć
+Name[be]=Карбованэць
+Name[de]=Brazukcoin
+Name[es]=Brazukcoin
+Comment=Brazukcoinvanets wallet
+Comment[uk]=Гаманець Карбованца
+Comment[ru]=Кошелек Карбованца
+Comment[pl]=Portfel Brazukcoinwańca
+Comment[be]=Кашалёк Карбованца
+Comment[de]=Brazukcoin Brieftasche
+Comment[es]=Brazukcoin Monedero
+Exec=brazukcoin %U
+Terminal=false
+Type=Application
+Icon=brazukcoin
+MimeType=x-scheme-handler/brazukcoin;
+Categories=Office;Finance;
+Version=1.2.0
