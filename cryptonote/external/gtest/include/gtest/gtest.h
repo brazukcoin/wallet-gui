@@ -1305,7 +1305,7 @@ class GTEST_API_ UnitTest {
 // starts for it to take effect.  For example, you can define a global
 // variable like this:
 //
-//   testing::Environment* const foo_env =
+//   testing::Environment* const bar_env =
 //       testing::AddGlobalTestEnvironment(new FooEnvironment);
 //
 // However, we strongly recommend you to write your own main() and
@@ -1791,8 +1791,8 @@ class GTEST_API_ AssertHelper {
 // };
 // TEST_P(FooTest, DoesBar) {
 //   // Can use GetParam() method here.
-//   Foo foo;
-//   ASSERT_TRUE(foo.DoesBar(GetParam()));
+//   Foo bar;
+//   ASSERT_TRUE(bar.DoesBar(GetParam()));
 // }
 // INSTANTIATE_TEST_CASE_P(OneToTenRange, FooTest, ::testing::Range(1, 10));
 
@@ -2193,12 +2193,12 @@ GTEST_API_ AssertionResult DoubleLE(const char* expr1, const char* expr2,
 //
 // the code:
 //
-//   void Test1() { Foo<bool> foo; }
+//   void Test1() { Foo<bool> bar; }
 //
 // will NOT generate a compiler error, as Foo<bool>::Bar() is never
 // actually instantiated.  Instead, you need:
 //
-//   void Test2() { Foo<bool> foo; foo.Bar(); }
+//   void Test2() { Foo<bool> bar; bar.Bar(); }
 //
 // to cause a compiler error.
 template <typename T1, typename T2>
@@ -2219,8 +2219,8 @@ bool StaticAssertTypeEq() {
 // macro.  Example:
 //
 //   TEST(FooTest, InitializesCorrectly) {
-//     Foo foo;
-//     EXPECT_TRUE(foo.StatusIsOK());
+//     Foo bar;
+//     EXPECT_TRUE(bar.StatusIsOK());
 //   }
 
 // Note that we call GetTestTypeId() instead of GetTypeId<

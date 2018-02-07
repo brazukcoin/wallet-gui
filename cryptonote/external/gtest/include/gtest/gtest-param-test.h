@@ -68,7 +68,7 @@ class FooTest : public ::testing::TestWithParam<const char*> {
 TEST_P(FooTest, DoesBlah) {
   // Inside a test, access the test parameter with the GetParam() method
   // of the TestWithParam<T> class:
-  EXPECT_TRUE(foo.Blah(GetParam()));
+  EXPECT_TRUE(bar.Blah(GetParam()));
   ...
 }
 
@@ -174,7 +174,7 @@ TEST_F(BaseTest, HasFoo) {
 
 TEST_P(DerivedTest, DoesBlah) {
   // GetParam works just the same here as if you inherit from TestWithParam.
-  EXPECT_TRUE(foo.Blah(GetParam()));
+  EXPECT_TRUE(bar.Blah(GetParam()));
 }
 
 #endif  // 0
@@ -270,9 +270,9 @@ internal::ParamGenerator<T> Range(T start, T end) {
 // Examples:
 //
 // This instantiates tests from test case StringTest
-// each with C-string values of "foo", "bar", and "baz":
+// each with C-string values of "bar", "bar", and "baz":
 //
-// const char* strings[] = {"foo", "bar", "baz"};
+// const char* strings[] = {"bar", "bar", "baz"};
 // INSTANTIATE_TEST_CASE_P(StringSequence, SrtingTest, ValuesIn(strings));
 //
 // This instantiates tests from test case StlStringTest

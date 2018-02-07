@@ -268,8 +268,8 @@ TEST(GtestCheckSyntaxTest, WorksWithSwitch) {
 
 // Verifies behavior of FormatFileLocation.
 TEST(FormatFileLocationTest, FormatsFileLocation) {
-  EXPECT_PRED_FORMAT2(IsSubstring, "foo.cc", FormatFileLocation("foo.cc", 42));
-  EXPECT_PRED_FORMAT2(IsSubstring, "42", FormatFileLocation("foo.cc", 42));
+  EXPECT_PRED_FORMAT2(IsSubstring, "bar.cc", FormatFileLocation("bar.cc", 42));
+  EXPECT_PRED_FORMAT2(IsSubstring, "42", FormatFileLocation("bar.cc", 42));
 }
 
 TEST(FormatFileLocationTest, FormatsUnknownFile) {
@@ -279,7 +279,7 @@ TEST(FormatFileLocationTest, FormatsUnknownFile) {
 }
 
 TEST(FormatFileLocationTest, FormatsUknownLine) {
-  EXPECT_EQ("foo.cc:", FormatFileLocation("foo.cc", -1));
+  EXPECT_EQ("bar.cc:", FormatFileLocation("bar.cc", -1));
 }
 
 TEST(FormatFileLocationTest, FormatsUknownFileAndLine) {
@@ -288,7 +288,7 @@ TEST(FormatFileLocationTest, FormatsUknownFileAndLine) {
 
 // Verifies behavior of FormatCompilerIndependentFileLocation.
 TEST(FormatCompilerIndependentFileLocationTest, FormatsFileLocation) {
-  EXPECT_EQ("foo.cc:42", FormatCompilerIndependentFileLocation("foo.cc", 42));
+  EXPECT_EQ("bar.cc:42", FormatCompilerIndependentFileLocation("bar.cc", 42));
 }
 
 TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownFile) {
@@ -297,7 +297,7 @@ TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownFile) {
 }
 
 TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownLine) {
-  EXPECT_EQ("foo.cc", FormatCompilerIndependentFileLocation("foo.cc", -1));
+  EXPECT_EQ("bar.cc", FormatCompilerIndependentFileLocation("bar.cc", -1));
 }
 
 TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownFileAndLine) {
@@ -1000,7 +1000,7 @@ class NoDefaultContructor {
 };
 
 TEST(ThreadLocalTest, ValueDefaultContructorIsNotRequiredForParamVersion) {
-  ThreadLocal<NoDefaultContructor> bar(NoDefaultContructor("foo"));
+  ThreadLocal<NoDefaultContructor> bar(NoDefaultContructor("bar"));
   bar.pointer();
 }
 
@@ -1010,7 +1010,7 @@ TEST(ThreadLocalTest, GetAndPointerReturnSameValue) {
   EXPECT_EQ(thread_local_string.pointer(), &(thread_local_string.get()));
 
   // Verifies the condition still holds after calling set.
-  thread_local_string.set("foo");
+  thread_local_string.set("bar");
   EXPECT_EQ(thread_local_string.pointer(), &(thread_local_string.get()));
 }
 
@@ -1021,7 +1021,7 @@ TEST(ThreadLocalTest, PointerAndConstPointerReturnSameValue) {
 
   EXPECT_EQ(thread_local_string.pointer(), const_thread_local_string.pointer());
 
-  thread_local_string.set("foo");
+  thread_local_string.set("bar");
   EXPECT_EQ(thread_local_string.pointer(), const_thread_local_string.pointer());
 }
 
@@ -1133,8 +1133,8 @@ void RetrieveThreadLocalValue(
 }
 
 TEST(ThreadLocalTest, ParameterizedConstructorSetsDefault) {
-  ThreadLocal<std::string> thread_local_string("foo");
-  EXPECT_STREQ("foo", thread_local_string.get().c_str());
+  ThreadLocal<std::string> thread_local_string("bar");
+  EXPECT_STREQ("bar", thread_local_string.get().c_str());
 
   thread_local_string.set("bar");
   EXPECT_STREQ("bar", thread_local_string.get().c_str());
@@ -1142,7 +1142,7 @@ TEST(ThreadLocalTest, ParameterizedConstructorSetsDefault) {
   std::string result;
   RunFromThread(&RetrieveThreadLocalValue,
                 make_pair(&thread_local_string, &result));
-  EXPECT_STREQ("foo", result.c_str());
+  EXPECT_STREQ("bar", result.c_str());
 }
 
 // DestructorTracker keeps track of whether its instances have been

@@ -1,5 +1,4 @@
-// Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers, The Brazukcoinwanec developers
-// Copyright (c) 2018, The Brazukcoin developers
+// Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers, The Brazukcoin developers
 //
 // This file is part of Bytecoin.
 //
@@ -75,7 +74,7 @@ void addPortMapping(Logging::LoggerRef& logger, uint32_t port) {
   UPNPUrls urls;
   IGDdatas igdData;
   char lanAddress[64];
-//  result = UPNP_GetValidIGD(deviceList, &urls, &igdData, lanAddress, sizeof lanAddress);
+  result = UPNP_GetValidIGD(deviceList, &urls, &igdData, lanAddress, sizeof lanAddress);
   freeUPNPDevlist(deviceList);
   if (result != 0) {
     if (result == 1) {
@@ -96,7 +95,6 @@ void addPortMapping(Logging::LoggerRef& logger, uint32_t port) {
     }
 
     FreeUPNPUrls(&urls);
-    std::cout << "FreeUPNPUrls(&urls)\n";
   } else {
     logger(INFO) << "No IGD was found.";
   }

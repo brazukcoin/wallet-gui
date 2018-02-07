@@ -1909,7 +1909,7 @@ class Secret;
 //
 // or to make sure a struct is smaller than a certain size:
 //
-//   GTEST_COMPILE_ASSERT_(sizeof(foo) < 128, foo_too_large);
+//   GTEST_COMPILE_ASSERT_(sizeof(bar) < 128, bar_too_large);
 //
 // The second argument to the macro is the name of the variable. If
 // the expression is false, most compilers will issue a warning/error
@@ -1937,8 +1937,8 @@ struct CompileAssert {
 //   of the C++ standard).  As a result, gcc fails to reject the
 //   following code with the simple definition:
 //
-//     int foo;
-//     GTEST_COMPILE_ASSERT_(foo, msg); // not supposed to compile as foo is
+//     int bar;
+//     GTEST_COMPILE_ASSERT_(bar, msg); // not supposed to compile as bar is
 //                                      // not a compile-time constant.
 //
 // - By using the type CompileAssert<(bool(expr))>, we ensures that
@@ -2218,14 +2218,14 @@ inline To ImplicitCast_(To x) { return x; }
 //    This is the only place in the code we should use dynamic_cast<>.
 // In particular, you SHOULDN'T be using dynamic_cast<> in order to
 // do RTTI (eg code like this:
-//    if (dynamic_cast<Subclass1>(foo)) HandleASubclass1Object(foo);
-//    if (dynamic_cast<Subclass2>(foo)) HandleASubclass2Object(foo);
+//    if (dynamic_cast<Subclass1>(bar)) HandleASubclass1Object(bar);
+//    if (dynamic_cast<Subclass2>(bar)) HandleASubclass2Object(bar);
 // You should design the code some other way not to need this.
 //
 // This relatively ugly name is intentional. It prevents clashes with
 // similar functions users may have (e.g., down_cast). The internal
 // namespace alone is not enough because the function can be found by ADL.
-template<typename To, typename From>  // use like this: DownCast_<T*>(foo);
+template<typename To, typename From>  // use like this: DownCast_<T*>(bar);
 inline To DownCast_(From* f) {  // so we only accept pointers
   // Ensures that To is a sub-type of From *.  This test is here only
   // for compile-time type checking, and has no overhead in an
@@ -3140,9 +3140,9 @@ namespace testing {
 //
 // For example;
 //
-//   testing::Message foo;
-//   foo << 1 << " != " << 2;
-//   std::cout << foo;
+//   testing::Message bar;
+//   bar << 1 << " != " << 2;
+//   std::cout << bar;
 //
 // will print "1 != 2".
 //
@@ -3587,7 +3587,7 @@ class GTEST_API_ FilePath {
   // directory/base_name_<number>.extension if directory/base_name.extension
   // already exists. The number will be incremented until a pathname is found
   // that does not already exist.
-  // Examples: 'dir/foo_test.xml' or 'dir/foo_test_1.xml'.
+  // Examples: 'dir/bar_test.xml' or 'dir/bar_test_1.xml'.
   // There could be a race condition if two or more processes are calling this
   // function at the same time -- they could both pick the same filename.
   static FilePath GenerateUniqueFileName(const FilePath& directory,
@@ -3658,7 +3658,7 @@ class GTEST_API_ FilePath {
 
  private:
   // Replaces multiple consecutive separators with a single separator.
-  // For example, "bar///foo" becomes "bar/foo". Does not eliminate other
+  // For example, "bar///bar" becomes "bar/bar". Does not eliminate other
   // redundancies that might be in a pathname involving "." or "..".
   //
   // A pathname with multiple consecutive separators may occur either through
@@ -3667,15 +3667,15 @@ class GTEST_API_ FilePath {
   // may NOT generate a pathname with a trailing "/". Then elsewhere that
   // pathname may have another "/" and pathname components added to it,
   // without checking for the separator already being there.
-  // The script language and operating system may allow paths like "foo//bar"
+  // The script language and operating system may allow paths like "bar//bar"
   // but some of the functions in FilePath will not handle that correctly. In
   // particular, RemoveTrailingPathSeparator() only removes one separator, and
   // it is called in CreateDirectoriesRecursively() assuming that it will change
   // a pathname from directory syntax (trailing separator) to filename syntax.
   //
   // On Windows this method also replaces the alternate path separator '/' with
-  // the primary path separator '\\', so that for example "bar\\/\\foo" becomes
-  // "bar\\foo".
+  // the primary path separator '\\', so that for example "bar\\/\\bar" becomes
+  // "bar\\bar".
 
   void Normalize();
 
@@ -7025,13 +7025,13 @@ struct TypeList<Types<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13,
 // Due to C++ preprocessor weirdness, we need double indirection to
 // concatenate two tokens when one of them is __LINE__.  Writing
 //
-//   foo ## __LINE__
+//   bar ## __LINE__
 //
-// will result in the token foo__LINE__, instead of foo followed by
+// will result in the token bar__LINE__, instead of bar followed by
 // the current line number.  For more details, see
 // http://www.parashift.com/c++-faq-lite/misc-technical-issues.html#faq-39.6
-#define GTEST_CONCAT_TOKEN_(foo, bar) GTEST_CONCAT_TOKEN_IMPL_(foo, bar)
-#define GTEST_CONCAT_TOKEN_IMPL_(foo, bar) foo ## bar
+#define GTEST_CONCAT_TOKEN_(bar, bar) GTEST_CONCAT_TOKEN_IMPL_(bar, bar)
+#define GTEST_CONCAT_TOKEN_IMPL_(bar, bar) bar ## bar
 
 class ProtocolMessage;
 namespace proto2 { class Message; }
@@ -7135,10 +7135,10 @@ class GTEST_API_ ScopedTrace {
 // (e.g. ASSERT_EQ, EXPECT_STREQ, etc) failure.
 //
 // The first four parameters are the expressions used in the assertion
-// and their values, as strings.  For example, for ASSERT_EQ(foo, bar)
-// where foo is 5 and bar is 6, we have:
+// and their values, as strings.  For example, for ASSERT_EQ(bar, bar)
+// where bar is 5 and bar is 6, we have:
 //
-//   expected_expression: "foo"
+//   expected_expression: "bar"
 //   actual_expression:   "bar"
 //   expected_value:      "5"
 //   actual_value:        "6"
@@ -8590,8 +8590,8 @@ GTEST_API_ bool InDeathTestChild();
 //   simplicity, the current implementation doesn't search the PATH
 //   when launching the sub-process.  This means that the user must
 //   invoke the test program via a path that contains at least one
-//   path separator (e.g. path/to/foo_test and
-//   /absolute/path/to/bar_test are fine, but foo_test is not).  This
+//   path separator (e.g. path/to/bar_test and
+//   /absolute/path/to/bar_test are fine, but bar_test is not).  This
 //   is rarely a problem as people usually don't put the test binary
 //   directory in PATH.
 //
@@ -8797,7 +8797,7 @@ class FooTest : public ::testing::TestWithParam<const char*> {
 TEST_P(FooTest, DoesBlah) {
   // Inside a test, access the test parameter with the GetParam() method
   // of the TestWithParam<T> class:
-  EXPECT_TRUE(foo.Blah(GetParam()));
+  EXPECT_TRUE(bar.Blah(GetParam()));
   ...
 }
 
@@ -8903,7 +8903,7 @@ TEST_F(BaseTest, HasFoo) {
 
 TEST_P(DerivedTest, DoesBlah) {
   // GetParam works just the same here as if you inherit from TestWithParam.
-  EXPECT_TRUE(foo.Blah(GetParam()));
+  EXPECT_TRUE(bar.Blah(GetParam()));
 }
 
 #endif  // 0
@@ -9233,10 +9233,10 @@ linked_ptr<T> make_linked_ptr(T* ptr) {
 // defining either operator<<() or PrintTo() in the namespace that
 // defines T.  More specifically, the FIRST defined function in the
 // following list will be used (assuming T is defined in namespace
-// foo):
+// bar):
 //
-//   1. foo::PrintTo(const T&, ostream*)
-//   2. operator<<(ostream&, const T&) defined in either foo or the
+//   1. bar::PrintTo(const T&, ostream*)
+//   2. operator<<(ostream&, const T&) defined in either bar or the
 //      global namespace.
 //
 // If none of the above is defined, it will print the debug string of
@@ -9420,17 +9420,17 @@ void DefaultPrintNonContainerTo(const T& value, ::std::ostream* os) {
   // gcc 3.3 fails to compile due to a compiler bug.
   using namespace ::testing::internal2;  // NOLINT
 
-  // Assuming T is defined in namespace foo, in the next statement,
+  // Assuming T is defined in namespace bar, in the next statement,
   // the compiler will consider all of:
   //
-  //   1. foo::operator<< (thanks to Koenig look-up),
+  //   1. bar::operator<< (thanks to Koenig look-up),
   //   2. ::operator<< (as the current namespace is enclosed in ::),
   //   3. testing::internal2::operator<< (thanks to the using statement above).
   //
   // The operator<< whose type matches T best will be picked.
   //
   // We deliberately allow #2 to be a candidate, as sometimes it's
-  // impossible to define #1 (e.g. when foo is ::std, defining
+  // impossible to define #1 (e.g. when bar is ::std, defining
   // anything in it is undefined behavior unless you are a compiler
   // vendor.).
   *os << value;
@@ -15836,9 +15836,9 @@ internal::ParamGenerator<T> Range(T start, T end) {
 // Examples:
 //
 // This instantiates tests from test case StringTest
-// each with C-string values of "foo", "bar", and "baz":
+// each with C-string values of "bar", "bar", and "baz":
 //
-// const char* strings[] = {"foo", "bar", "baz"};
+// const char* strings[] = {"bar", "bar", "baz"};
 // INSTANTIATE_TEST_CASE_P(StringSequence, SrtingTest, ValuesIn(strings));
 //
 // This instantiates tests from test case StlStringTest
@@ -18718,7 +18718,7 @@ class GTEST_API_ UnitTest {
 // starts for it to take effect.  For example, you can define a global
 // variable like this:
 //
-//   testing::Environment* const foo_env =
+//   testing::Environment* const bar_env =
 //       testing::AddGlobalTestEnvironment(new FooEnvironment);
 //
 // However, we strongly recommend you to write your own main() and
@@ -19204,8 +19204,8 @@ class GTEST_API_ AssertHelper {
 // };
 // TEST_P(FooTest, DoesBar) {
 //   // Can use GetParam() method here.
-//   Foo foo;
-//   ASSERT_TRUE(foo.DoesBar(GetParam()));
+//   Foo bar;
+//   ASSERT_TRUE(bar.DoesBar(GetParam()));
 // }
 // INSTANTIATE_TEST_CASE_P(OneToTenRange, FooTest, ::testing::Range(1, 10));
 
@@ -19963,12 +19963,12 @@ GTEST_API_ AssertionResult DoubleLE(const char* expr1, const char* expr2,
 //
 // the code:
 //
-//   void Test1() { Foo<bool> foo; }
+//   void Test1() { Foo<bool> bar; }
 //
 // will NOT generate a compiler error, as Foo<bool>::Bar() is never
 // actually instantiated.  Instead, you need:
 //
-//   void Test2() { Foo<bool> foo; foo.Bar(); }
+//   void Test2() { Foo<bool> bar; bar.Bar(); }
 //
 // to cause a compiler error.
 template <typename T1, typename T2>
@@ -19989,8 +19989,8 @@ bool StaticAssertTypeEq() {
 // macro.  Example:
 //
 //   TEST(FooTest, InitializesCorrectly) {
-//     Foo foo;
-//     EXPECT_TRUE(foo.StatusIsOK());
+//     Foo bar;
+//     EXPECT_TRUE(bar.StatusIsOK());
 //   }
 
 // Note that we call GetTestTypeId() instead of GetTypeId<

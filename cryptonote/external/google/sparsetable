@@ -169,7 +169,7 @@ class table_iterator {
     : table(tbl), pos(p) { }
   // The default constructor, used when I define vars of type table::iterator
   table_iterator() : table(NULL), pos(0) { }
-  // The copy constructor, for when I say table::iterator foo = tbl.begin()
+  // The copy constructor, for when I say table::iterator bar = tbl.begin()
   // The default destructor is fine; we don't define one
   // The default operator= is fine; we don't define one
 
@@ -252,7 +252,7 @@ class const_table_iterator {
     : table(tbl), pos(p) { }
   // The default constructor, used when I define vars of type table::iterator
   const_table_iterator() : table(NULL), pos(0) { }
-  // The copy constructor, for when I say table::iterator foo = tbl.begin()
+  // The copy constructor, for when I say table::iterator bar = tbl.begin()
   // Also converts normal iterators to const iterators
   const_table_iterator(const iterator &from)
     : table(from.table), pos(from.pos) { }

@@ -47,8 +47,8 @@ namespace {
 class TestPartResultTest : public Test {
  protected:
   TestPartResultTest()
-      : r1_(TestPartResult::kSuccess, "foo/bar.cc", 10, "Success!"),
-        r2_(TestPartResult::kNonFatalFailure, "foo/bar.cc", -1, "Failure!"),
+      : r1_(TestPartResult::kSuccess, "bar/bar.cc", 10, "Success!"),
+        r2_(TestPartResult::kNonFatalFailure, "bar/bar.cc", -1, "Failure!"),
         r3_(TestPartResult::kFatalFailure, NULL, -1, "Failure!") {}
 
   TestPartResult r1_, r2_, r3_;
@@ -111,7 +111,7 @@ TEST_F(TestPartResultTest, type) {
 
 // Tests TestPartResult::file_name().
 TEST_F(TestPartResultTest, file_name) {
-  EXPECT_STREQ("foo/bar.cc", r1_.file_name());
+  EXPECT_STREQ("bar/bar.cc", r1_.file_name());
   EXPECT_STREQ(NULL, r3_.file_name());
 }
 
@@ -159,8 +159,8 @@ TEST_F(TestPartResultTest, NonfatallyFailed) {
 class TestPartResultArrayTest : public Test {
  protected:
   TestPartResultArrayTest()
-      : r1_(TestPartResult::kNonFatalFailure, "foo/bar.cc", -1, "Failure 1"),
-        r2_(TestPartResult::kFatalFailure, "foo/bar.cc", -1, "Failure 2") {}
+      : r1_(TestPartResult::kNonFatalFailure, "bar/bar.cc", -1, "Failure 1"),
+        r2_(TestPartResult::kFatalFailure, "bar/bar.cc", -1, "Failure 2") {}
 
   const TestPartResult r1_, r2_;
 };

@@ -68,9 +68,9 @@ namespace testing {
 //
 // For example;
 //
-//   testing::Message foo;
-//   foo << 1 << " != " << 2;
-//   std::cout << foo;
+//   testing::Message bar;
+//   bar << 1 << " != " << 2;
+//   std::cout << bar;
 //
 // will print "1 != 2".
 //

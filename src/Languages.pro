@@ -58,8 +58,8 @@ update.cpp \
 gui/ConnectionSettings.cpp \
 gui/NewNodeDialog.cpp \
 gui/NodeModel.cpp \
-gui/OpenUriDialog.cpp \
 gui/QRLabel.cpp \
+gui/OpenUriDialog.cpp \
 gui/ConfirmSendDialog.cpp \
 gui/ExportTrackingKeyDialog.cpp \
 gui/ImportTrackingKeyDialog.cpp \

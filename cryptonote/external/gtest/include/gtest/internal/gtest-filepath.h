@@ -100,7 +100,7 @@ class GTEST_API_ FilePath {
   // directory/base_name_<number>.extension if directory/base_name.extension
   // already exists. The number will be incremented until a pathname is found
   // that does not already exist.
-  // Examples: 'dir/foo_test.xml' or 'dir/foo_test_1.xml'.
+  // Examples: 'dir/bar_test.xml' or 'dir/bar_test_1.xml'.
   // There could be a race condition if two or more processes are calling this
   // function at the same time -- they could both pick the same filename.
   static FilePath GenerateUniqueFileName(const FilePath& directory,
@@ -171,7 +171,7 @@ class GTEST_API_ FilePath {
 
  private:
   // Replaces multiple consecutive separators with a single separator.
-  // For example, "bar///foo" becomes "bar/foo". Does not eliminate other
+  // For example, "bar///bar" becomes "bar/bar". Does not eliminate other
   // redundancies that might be in a pathname involving "." or "..".
   //
   // A pathname with multiple consecutive separators may occur either through
@@ -180,15 +180,15 @@ class GTEST_API_ FilePath {
   // may NOT generate a pathname with a trailing "/". Then elsewhere that
   // pathname may have another "/" and pathname components added to it,
   // without checking for the separator already being there.
-  // The script language and operating system may allow paths like "foo//bar"
+  // The script language and operating system may allow paths like "bar//bar"
   // but some of the functions in FilePath will not handle that correctly. In
   // particular, RemoveTrailingPathSeparator() only removes one separator, and
   // it is called in CreateDirectoriesRecursively() assuming that it will change
   // a pathname from directory syntax (trailing separator) to filename syntax.
   //
   // On Windows this method also replaces the alternate path separator '/' with
-  // the primary path separator '\\', so that for example "bar\\/\\foo" becomes
-  // "bar\\foo".
+  // the primary path separator '\\', so that for example "bar\\/\\bar" becomes
+  // "bar\\bar".
 
   void Normalize();
 

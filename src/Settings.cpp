@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2015 The Cryptonote developers
 // Copyright (c) 2015-2016 XDN developers
-// Copyright (c) 2016 The Brazukcoinwanec developers
+// Copyright (c) 2016 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -89,7 +89,7 @@ void Settings::load() {
   }
 
   QStringList defaultPoolList;
-  defaultPoolList << "pool.brazukcoin.org:3333" << "bzk.hpool.net:19807" << "brazukcoin.labbinarymining.com:3444" << "bzkpool.brazukcoin.com:3333";
+  defaultPoolList << "pool.brazukcoin.com:3333" << "pool2.democats.org:45570" << "bzk.sberex.com:3333" << "mine.bzk.mypool.online:32350" << "bzk-eu1.miningpool.org.ua:3333";
   if (!m_settings.contains(OPTION_MINING_POOLS)) {
     setMiningPoolList(QStringList() << defaultPoolList);
   } else {
@@ -103,7 +103,7 @@ void Settings::load() {
   }
 
   QStringList defaultNodesList;
-  defaultNodesList << "132.148.90.225:44044" << "191.252.120.160:44044";
+  defaultNodesList << "node.brazukcoin.com:32348" << "node.bzk.mypool.online:32348"; // "pool2.democats.org:7671"
   if (!m_settings.contains(OPTION_RPCNODES)) {
     setRpcNodesList(QStringList() << defaultNodesList);
   } else {

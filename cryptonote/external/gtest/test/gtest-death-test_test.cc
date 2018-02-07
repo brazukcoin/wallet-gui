@@ -117,7 +117,7 @@ void DieWithMessage(const ::std::string& message) {
   //
   // Some compilers can recognize that _exit() never returns and issue the
   // 'unreachable code' warning for code following this function, unless
-  // fooled by a fake condition.
+  // barled by a fake condition.
   if (AlwaysTrue())
     _exit(1);
 }
@@ -728,7 +728,7 @@ static void TestExitMacros() {
 
 # else
 
-  EXPECT_EXIT(raise(SIGKILL), testing::KilledBySignal(SIGKILL), "") << "foo";
+  EXPECT_EXIT(raise(SIGKILL), testing::KilledBySignal(SIGKILL), "") << "bar";
   ASSERT_EXIT(raise(SIGUSR2), testing::KilledBySignal(SIGUSR2), "") << "bar";
 
   EXPECT_FATAL_FAILURE({  // NOLINT

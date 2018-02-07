@@ -119,7 +119,7 @@ void operator<<(::std::ostream& os, const StreamableInGlobal* /* x */) {
   os << "StreamableInGlobal*";
 }
 
-namespace foo {
+namespace bar {
 
 // A user-defined unprintable type in a user namespace.
 class UnprintableInFoo {
@@ -182,7 +182,7 @@ inline ::std::ostream& operator<<(::std::ostream& os,
   return os << "StreamableTemplateInFoo: " << x.value();
 }
 
-}  // namespace foo
+}  // namespace bar
 
 namespace testing {
 namespace gtest_printers_test {
@@ -1052,7 +1052,7 @@ TEST(PrintUnprintableTypeTest, InGlobalNamespace) {
 // Unprintable types in a user namespace.
 TEST(PrintUnprintableTypeTest, InUserNamespace) {
   EXPECT_EQ("16-byte object <EF-12 00-00 34-AB 00-00 00-00 00-00 00-00 00-00>",
-            Print(::foo::UnprintableInFoo()));
+            Print(::bar::UnprintableInFoo()));
 }
 
 // Unprintable types are that too big to be printed completely.
@@ -1085,26 +1085,26 @@ TEST(PrintStreamableTypeTest, InGlobalNamespace) {
 // Printable template types in a user namespace.
 TEST(PrintStreamableTypeTest, TemplateTypeInUserNamespace) {
   EXPECT_EQ("StreamableTemplateInFoo: 0",
-            Print(::foo::StreamableTemplateInFoo<int>()));
+            Print(::bar::StreamableTemplateInFoo<int>()));
 }
 
 // Tests printing user-defined types that have a PrintTo() function.
 TEST(PrintPrintableTypeTest, InUserNamespace) {
   EXPECT_EQ("PrintableViaPrintTo: 0",
-            Print(::foo::PrintableViaPrintTo()));
+            Print(::bar::PrintableViaPrintTo()));
 }
 
 // Tests printing a pointer to a user-defined type that has a <<
 // operator for its pointer.
 TEST(PrintPrintableTypeTest, PointerInUserNamespace) {
-  ::foo::PointerPrintable x;
+  ::bar::PointerPrintable x;
   EXPECT_EQ("PointerPrintable*", Print(&x));
 }
 
 // Tests printing user-defined class template that have a PrintTo() function.
 TEST(PrintPrintableTypeTest, TemplateInUserNamespace) {
   EXPECT_EQ("PrintableViaPrintToTemplate: 5",
-            Print(::foo::PrintableViaPrintToTemplate<int>(5)));
+            Print(::bar::PrintableViaPrintToTemplate<int>(5)));
 }
 
 #if GTEST_HAS_PROTOBUF_
@@ -1158,7 +1158,7 @@ TEST(PrintReferenceTest, PrintsAddressAndValue) {
   EXPECT_EQ("@" + PrintPointer(a) + " { { 0, 1, 2 }, { 3, 4, 5 } }",
             PrintByRef(a));
 
-  const ::foo::UnprintableInFoo x;
+  const ::bar::UnprintableInFoo x;
   EXPECT_EQ("@" + PrintPointer(&x) + " 16-byte object "
             "<EF-12 00-00 34-AB 00-00 00-00 00-00 00-00 00-00>",
             PrintByRef(x));

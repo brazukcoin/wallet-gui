@@ -802,7 +802,7 @@ class Secret;
 //
 // or to make sure a struct is smaller than a certain size:
 //
-//   GTEST_COMPILE_ASSERT_(sizeof(foo) < 128, foo_too_large);
+//   GTEST_COMPILE_ASSERT_(sizeof(bar) < 128, bar_too_large);
 //
 // The second argument to the macro is the name of the variable. If
 // the expression is false, most compilers will issue a warning/error
@@ -830,8 +830,8 @@ struct CompileAssert {
 //   of the C++ standard).  As a result, gcc fails to reject the
 //   following code with the simple definition:
 //
-//     int foo;
-//     GTEST_COMPILE_ASSERT_(foo, msg); // not supposed to compile as foo is
+//     int bar;
+//     GTEST_COMPILE_ASSERT_(bar, msg); // not supposed to compile as bar is
 //                                      // not a compile-time constant.
 //
 // - By using the type CompileAssert<(bool(expr))>, we ensures that
@@ -1111,14 +1111,14 @@ inline To ImplicitCast_(To x) { return x; }
 //    This is the only place in the code we should use dynamic_cast<>.
 // In particular, you SHOULDN'T be using dynamic_cast<> in order to
 // do RTTI (eg code like this:
-//    if (dynamic_cast<Subclass1>(foo)) HandleASubclass1Object(foo);
-//    if (dynamic_cast<Subclass2>(foo)) HandleASubclass2Object(foo);
+//    if (dynamic_cast<Subclass1>(bar)) HandleASubclass1Object(bar);
+//    if (dynamic_cast<Subclass2>(bar)) HandleASubclass2Object(bar);
 // You should design the code some other way not to need this.
 //
 // This relatively ugly name is intentional. It prevents clashes with
 // similar functions users may have (e.g., down_cast). The internal
 // namespace alone is not enough because the function can be found by ADL.
-template<typename To, typename From>  // use like this: DownCast_<T*>(foo);
+template<typename To, typename From>  // use like this: DownCast_<T*>(bar);
 inline To DownCast_(From* f) {  // so we only accept pointers
   // Ensures that To is a sub-type of From *.  This test is here only
   // for compile-time type checking, and has no overhead in an

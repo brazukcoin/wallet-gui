@@ -9,7 +9,7 @@
 
 # serial 5 lt~obsolete.m4
 
-# These exist entirely to fool aclocal when bootstrapping libtool.
+# These exist entirely to barl aclocal when bootstrapping libtool.
 #
 # In the past libtool.m4 has provided macros via AC_DEFUN (or AU_DEFUN)
 # which have later been changed to m4_define as they aren't part of the

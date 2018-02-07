@@ -1011,7 +1011,7 @@ _LT_EOF
 }
 
 
-# Shorthand for --mode=foo, only valid as the first argument
+# Shorthand for --mode=bar, only valid as the first argument
 case $1 in
 clean|clea|cle|cl)
   shift; set dummy --mode clean ${1+"$@"}; shift
@@ -6419,7 +6419,7 @@ func_mode_link ()
 	# Read the .la file
 	func_source "$lib"
 
-	# Convert "-framework foo" to "foo.ltframework"
+	# Convert "-framework bar" to "bar.ltframework"
 	if test -n "$inherited_linker_flags"; then
 	  tmp_inherited_linker_flags=`$ECHO "$inherited_linker_flags" | $SED 's/-framework \([^ $]*\)/\1.ltframework/g'`
 	  for tmp_inherited_linker_flag in $tmp_inherited_linker_flags; do
@@ -7998,7 +7998,7 @@ EOF
 	# Done checking deplibs!
 	deplibs=$newdeplibs
       fi
-      # Time to change all our "foo.ltframework" stuff back to "-framework foo"
+      # Time to change all our "bar.ltframework" stuff back to "-framework bar"
       case $host in
 	*-*-darwin*)
 	  newdeplibs=`$ECHO " $newdeplibs" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
@@ -8731,7 +8731,7 @@ EOF
 	    ;;
 	  esac
 	fi
-	# Time to change all our "foo.ltframework" stuff back to "-framework foo"
+	# Time to change all our "bar.ltframework" stuff back to "-framework bar"
 	compile_deplibs=`$ECHO " $compile_deplibs" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
 	finalize_deplibs=`$ECHO " $finalize_deplibs" | $SED 's% \([^ $]*\).ltframework% -framework \1%g'`
 	;;

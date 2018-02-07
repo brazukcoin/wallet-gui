@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2016 The Brazukcoinwanec developers
+// Copyright (c) 2016 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,7 +27,7 @@ const QString BITCOIN_IPC_PREFIX("brazukcoin:");
 
 static QString ipcServerName()
 {
-    QString name("Brazukcoinwanec");
+    QString name("Brazukcoin");
 
     return name;
 }

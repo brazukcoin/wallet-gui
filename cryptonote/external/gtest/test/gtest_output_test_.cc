@@ -455,7 +455,7 @@ TEST_F(FatalFailureInSetUpTest, FailureInSetUp) {
 }
 
 TEST(AddFailureAtTest, MessageContainsSpecifiedFileAndLineNumber) {
-  ADD_FAILURE_AT("foo.cc", 42) << "Expected failure in foo.cc";
+  ADD_FAILURE_AT("bar.cc", 42) << "Expected failure in bar.cc";
 }
 
 #if GTEST_IS_THREADSAFE
@@ -525,7 +525,7 @@ class DeathTestAndMultiThreadsTest : public testing::Test {
 // same test name (but in different namespaces), the second test will
 // fail.
 
-namespace foo {
+namespace bar {
 
 class MixedUpTestCaseTest : public testing::Test {
 };
@@ -539,7 +539,7 @@ class MixedUpTestCaseWithSameTestNameTest : public testing::Test {
 TEST_F(MixedUpTestCaseWithSameTestNameTest,
        TheSecondTestWithThisNameShouldFail) {}
 
-}  // namespace foo
+}  // namespace bar
 
 namespace bar {
 

@@ -980,7 +980,7 @@ m4_defun_once([_LT_REQUIRED_DARWIN_CHECKS],[
 	# non-empty at configure time, or by adding -multi_module to the
 	# link flags.
 	rm -rf libconftest.dylib*
-	echo "int foo(void){return 1;}" > conftest.c
+	echo "int bar(void){return 1;}" > conftest.c
 	echo "$LTCC $LTCFLAGS $LDFLAGS -o libconftest.dylib \
 -dynamiclib -Wl,-single_module conftest.c" >&AS_MESSAGE_LOG_FD
 	$LTCC $LTCFLAGS $LDFLAGS -o libconftest.dylib \
@@ -2197,7 +2197,7 @@ if test "$GCC" = yes; then
   done
   lt_search_path_spec=`$ECHO "$lt_tmp_lt_search_path_spec" | awk '
 BEGIN {RS=" "; FS="/|\n";} {
-  lt_foo="";
+  lt_bar="";
   lt_count=0;
   for (lt_i = NF; lt_i > 0; lt_i--) {
     if ($lt_i != "" && $lt_i != ".") {
@@ -2205,15 +2205,15 @@ BEGIN {RS=" "; FS="/|\n";} {
         lt_count++;
       } else {
         if (lt_count == 0) {
-          lt_foo="/" $lt_i lt_foo;
+          lt_bar="/" $lt_i lt_bar;
         } else {
           lt_count--;
         }
       }
     }
   }
-  if (lt_foo != "") { lt_freq[[lt_foo]]++; }
-  if (lt_freq[[lt_foo]] == 1) { print lt_foo; }
+  if (lt_bar != "") { lt_freq[[lt_bar]]++; }
+  if (lt_freq[[lt_bar]] == 1) { print lt_bar; }
 }'`
   # AWK program above erroneously prepends '/' to C:/dos/paths
   # for these hosts.
@@ -2654,7 +2654,7 @@ linux* | k*bsd*-gnu | kopensolaris*-gnu)
     [lt_cv_shlibpath_overrides_runpath=no
     save_LDFLAGS=$LDFLAGS
     save_libdir=$libdir
-    eval "libdir=/foo; wl=\"$_LT_TAGVAR(lt_prog_compiler_wl, $1)\"; \
+    eval "libdir=/bar; wl=\"$_LT_TAGVAR(lt_prog_compiler_wl, $1)\"; \
 	 LDFLAGS=\"\$LDFLAGS $_LT_TAGVAR(hardcode_libdir_flag_spec, $1)\""
     AC_LINK_IFELSE([AC_LANG_PROGRAM([],[])],
       [AS_IF([ ($OBJDUMP -p conftest$ac_exeext) 2>/dev/null | grep "RUNPATH.*$libdir" >/dev/null],
@@ -5333,16 +5333,16 @@ _LT_EOF
 	AC_CACHE_CHECK([whether the $host_os linker accepts -exported_symbol],
 	  [lt_cv_irix_exported_symbol],
 	  [save_LDFLAGS="$LDFLAGS"
-	   LDFLAGS="$LDFLAGS -shared ${wl}-exported_symbol ${wl}foo ${wl}-update_registry ${wl}/dev/null"
+	   LDFLAGS="$LDFLAGS -shared ${wl}-exported_symbol ${wl}bar ${wl}-update_registry ${wl}/dev/null"
 	   AC_LINK_IFELSE(
 	     [AC_LANG_SOURCE(
-	        [AC_LANG_CASE([C], [[int foo (void) { return 0; }]],
-			      [C++], [[int foo (void) { return 0; }]],
+	        [AC_LANG_CASE([C], [[int bar (void) { return 0; }]],
+			      [C++], [[int bar (void) { return 0; }]],
 			      [Fortran 77], [[
-      subroutine foo
+      subroutine bar
       end]],
 			      [Fortran], [[
-      subroutine foo
+      subroutine bar
       end]])])],
 	      [lt_cv_irix_exported_symbol=yes],
 	      [lt_cv_irix_exported_symbol=no])
@@ -6951,7 +6951,7 @@ dnl tag define a new lt_????_link_test_code variable,
 dnl but it's only used here...
 m4_if([$1], [], [cat > conftest.$ac_ext <<_LT_EOF
 int a;
-void foo (void) { a = 0; }
+void bar (void) { a = 0; }
 _LT_EOF
 ], [$1], [CXX], [cat > conftest.$ac_ext <<_LT_EOF
 class Foo
@@ -6963,7 +6963,7 @@ private:
 };
 _LT_EOF
 ], [$1], [F77], [cat > conftest.$ac_ext <<_LT_EOF
-      subroutine foo
+      subroutine bar
       implicit none
       integer*4 a
       a=0
@@ -6971,7 +6971,7 @@ _LT_EOF
       end
 _LT_EOF
 ], [$1], [FC], [cat > conftest.$ac_ext <<_LT_EOF
-      subroutine foo
+      subroutine bar
       implicit none
       integer a
       a=0
@@ -6979,7 +6979,7 @@ _LT_EOF
       end
 _LT_EOF
 ], [$1], [GCJ], [cat > conftest.$ac_ext <<_LT_EOF
-public class foo {
+public class bar {
   private int a;
   public void bar (void) {
     a = 0;
@@ -6987,8 +6987,8 @@ public class foo {
 };
 _LT_EOF
 ], [$1], [GO], [cat > conftest.$ac_ext <<_LT_EOF
-package foo
-func foo() {
+package bar
+func bar() {
 }
 _LT_EOF
 ])
@@ -7458,7 +7458,7 @@ objext=o
 _LT_TAGVAR(objext, $1)=$objext
 
 # Code to be used in simple compile tests
-lt_simple_compile_test_code="class foo {}"
+lt_simple_compile_test_code="class bar {}"
 
 # Code to be used in simple link tests
 lt_simple_link_test_code='public class conftest { public static void main(String[[]] argv) {}; }'
@@ -7810,7 +7810,7 @@ _LT_CONFIG_LIBTOOL_INIT([xsi_shell='$xsi_shell'])
 
 AC_MSG_CHECKING([whether the shell understands "+="])
 lt_shell_append=no
-( foo=bar; set foo baz; eval "$[1]+=\$[2]" && test "$foo" = barbaz ) \
+( bar=bar; set bar baz; eval "$[1]+=\$[2]" && test "$bar" = barbaz ) \
     >/dev/null 2>&1 \
   && lt_shell_append=yes
 AC_MSG_RESULT([$lt_shell_append])

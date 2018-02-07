@@ -65,13 +65,13 @@
 // Due to C++ preprocessor weirdness, we need double indirection to
 // concatenate two tokens when one of them is __LINE__.  Writing
 //
-//   foo ## __LINE__
+//   bar ## __LINE__
 //
-// will result in the token foo__LINE__, instead of foo followed by
+// will result in the token bar__LINE__, instead of bar followed by
 // the current line number.  For more details, see
 // http://www.parashift.com/c++-faq-lite/misc-technical-issues.html#faq-39.6
-#define GTEST_CONCAT_TOKEN_(foo, bar) GTEST_CONCAT_TOKEN_IMPL_(foo, bar)
-#define GTEST_CONCAT_TOKEN_IMPL_(foo, bar) foo ## bar
+#define GTEST_CONCAT_TOKEN_(bar, bar) GTEST_CONCAT_TOKEN_IMPL_(bar, bar)
+#define GTEST_CONCAT_TOKEN_IMPL_(bar, bar) bar ## bar
 
 class ProtocolMessage;
 namespace proto2 { class Message; }
@@ -175,10 +175,10 @@ class GTEST_API_ ScopedTrace {
 // (e.g. ASSERT_EQ, EXPECT_STREQ, etc) failure.
 //
 // The first four parameters are the expressions used in the assertion
-// and their values, as strings.  For example, for ASSERT_EQ(foo, bar)
-// where foo is 5 and bar is 6, we have:
+// and their values, as strings.  For example, for ASSERT_EQ(bar, bar)
+// where bar is 5 and bar is 6, we have:
 //
-//   expected_expression: "foo"
+//   expected_expression: "bar"
 //   actual_expression:   "bar"
 //   expected_value:      "5"
 //   actual_value:        "6"

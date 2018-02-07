@@ -1,5 +1,4 @@
-// Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers, The Brazukcoinwanec developers
-// Copyright (c) 2018, The Brazukcoin developers
+// Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers, The Brazukcoin developers
 //
 // This file is part of Bytecoin.
 //
@@ -619,6 +618,13 @@ std::vector<Transaction> core::getPoolTransactions() {
     result.emplace_back(std::move(tx));
   }
   return result;
+}
+
+std::list<CryptoNote::tx_memory_pool::TransactionDetails> core::getMemoryPool() const {
+  //std::list<CryptoNote::tx_memory_pool::TransactionDetails> txs;
+  //m_mempool.getMemoryPool(txs);
+  //return txs;
+	return m_mempool.getMemoryPool();
 }
 
 std::vector<Crypto::Hash> core::buildSparseChain() {

@@ -250,9 +250,9 @@ Expected failure #3, in the test fixture d'tor.
 [0;31m[  FAILED  ] [mFatalFailureInSetUpTest.FailureInSetUp
 [0;32m[----------] [m1 test from AddFailureAtTest
 [0;32m[ RUN      ] [mAddFailureAtTest.MessageContainsSpecifiedFileAndLineNumber
-foo.cc:42: Failure
+bar.cc:42: Failure
 Failed
-Expected failure in foo.cc
+Expected failure in bar.cc
 [0;31m[  FAILED  ] [mAddFailureAtTest.MessageContainsSpecifiedFileAndLineNumber
 [0;32m[----------] [m4 tests from MixedUpTestCaseTest
 [0;32m[ RUN      ] [mMixedUpTestCaseTest.FirstTestFromNamespaceFoo

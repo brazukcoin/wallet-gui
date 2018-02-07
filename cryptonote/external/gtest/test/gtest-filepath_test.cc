@@ -248,27 +248,27 @@ TEST(RemoveFileNameTest, GivesRootDirForAlternateSeparator) {
 #endif
 
 TEST(MakeFileNameTest, GenerateWhenNumberIsZero) {
-  FilePath actual = FilePath::MakeFileName(FilePath("foo"), FilePath("bar"),
+  FilePath actual = FilePath::MakeFileName(FilePath("bar"), FilePath("bar"),
       0, "xml");
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar.xml", actual.string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar.xml", actual.string());
 }
 
 TEST(MakeFileNameTest, GenerateFileNameNumberGtZero) {
-  FilePath actual = FilePath::MakeFileName(FilePath("foo"), FilePath("bar"),
+  FilePath actual = FilePath::MakeFileName(FilePath("bar"), FilePath("bar"),
       12, "xml");
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar_12.xml", actual.string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar_12.xml", actual.string());
 }
 
 TEST(MakeFileNameTest, GenerateFileNameWithSlashNumberIsZero) {
-  FilePath actual = FilePath::MakeFileName(FilePath("foo" GTEST_PATH_SEP_),
+  FilePath actual = FilePath::MakeFileName(FilePath("bar" GTEST_PATH_SEP_),
       FilePath("bar"), 0, "xml");
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar.xml", actual.string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar.xml", actual.string());
 }
 
 TEST(MakeFileNameTest, GenerateFileNameWithSlashNumberGtZero) {
-  FilePath actual = FilePath::MakeFileName(FilePath("foo" GTEST_PATH_SEP_),
+  FilePath actual = FilePath::MakeFileName(FilePath("bar" GTEST_PATH_SEP_),
       FilePath("bar"), 12, "xml");
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar_12.xml", actual.string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar_12.xml", actual.string());
 }
 
 TEST(MakeFileNameTest, GenerateWhenNumberIsZeroAndDirIsEmpty) {
@@ -284,15 +284,15 @@ TEST(MakeFileNameTest, GenerateWhenNumberIsNotZeroAndDirIsEmpty) {
 }
 
 TEST(ConcatPathsTest, WorksWhenDirDoesNotEndWithPathSep) {
-  FilePath actual = FilePath::ConcatPaths(FilePath("foo"),
+  FilePath actual = FilePath::ConcatPaths(FilePath("bar"),
                                           FilePath("bar.xml"));
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar.xml", actual.string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar.xml", actual.string());
 }
 
 TEST(ConcatPathsTest, WorksWhenPath1EndsWithPathSep) {
-  FilePath actual = FilePath::ConcatPaths(FilePath("foo" GTEST_PATH_SEP_),
+  FilePath actual = FilePath::ConcatPaths(FilePath("bar" GTEST_PATH_SEP_),
                                           FilePath("bar.xml"));
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar.xml", actual.string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar.xml", actual.string());
 }
 
 TEST(ConcatPathsTest, Path1BeingEmpty) {
@@ -302,8 +302,8 @@ TEST(ConcatPathsTest, Path1BeingEmpty) {
 }
 
 TEST(ConcatPathsTest, Path2BeingEmpty) {
-  FilePath actual = FilePath::ConcatPaths(FilePath("foo"), FilePath(""));
-  EXPECT_EQ("foo" GTEST_PATH_SEP_, actual.string());
+  FilePath actual = FilePath::ConcatPaths(FilePath("bar"), FilePath(""));
+  EXPECT_EQ("bar" GTEST_PATH_SEP_, actual.string());
 }
 
 TEST(ConcatPathsTest, BothPathBeingEmpty) {
@@ -313,24 +313,24 @@ TEST(ConcatPathsTest, BothPathBeingEmpty) {
 }
 
 TEST(ConcatPathsTest, Path1ContainsPathSep) {
-  FilePath actual = FilePath::ConcatPaths(FilePath("foo" GTEST_PATH_SEP_ "bar"),
-                                          FilePath("foobar.xml"));
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar" GTEST_PATH_SEP_ "foobar.xml",
+  FilePath actual = FilePath::ConcatPaths(FilePath("bar" GTEST_PATH_SEP_ "bar"),
+                                          FilePath("barbar.xml"));
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar" GTEST_PATH_SEP_ "barbar.xml",
             actual.string());
 }
 
 TEST(ConcatPathsTest, Path2ContainsPathSep) {
   FilePath actual = FilePath::ConcatPaths(
-      FilePath("foo" GTEST_PATH_SEP_),
+      FilePath("bar" GTEST_PATH_SEP_),
       FilePath("bar" GTEST_PATH_SEP_ "bar.xml"));
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar" GTEST_PATH_SEP_ "bar.xml",
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar" GTEST_PATH_SEP_ "bar.xml",
             actual.string());
 }
 
 TEST(ConcatPathsTest, Path2EndsWithPathSep) {
-  FilePath actual = FilePath::ConcatPaths(FilePath("foo"),
+  FilePath actual = FilePath::ConcatPaths(FilePath("bar"),
                                           FilePath("bar" GTEST_PATH_SEP_));
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar" GTEST_PATH_SEP_, actual.string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar" GTEST_PATH_SEP_, actual.string());
 }
 
 // RemoveTrailingPathSeparator "" -> ""
@@ -338,31 +338,31 @@ TEST(RemoveTrailingPathSeparatorTest, EmptyString) {
   EXPECT_EQ("", FilePath("").RemoveTrailingPathSeparator().string());
 }
 
-// RemoveTrailingPathSeparator "foo" -> "foo"
+// RemoveTrailingPathSeparator "bar" -> "bar"
 TEST(RemoveTrailingPathSeparatorTest, FileNoSlashString) {
-  EXPECT_EQ("foo", FilePath("foo").RemoveTrailingPathSeparator().string());
+  EXPECT_EQ("bar", FilePath("bar").RemoveTrailingPathSeparator().string());
 }
 
-// RemoveTrailingPathSeparator "foo/" -> "foo"
+// RemoveTrailingPathSeparator "bar/" -> "bar"
 TEST(RemoveTrailingPathSeparatorTest, ShouldRemoveTrailingSeparator) {
-  EXPECT_EQ("foo",
-      FilePath("foo" GTEST_PATH_SEP_).RemoveTrailingPathSeparator().string());
+  EXPECT_EQ("bar",
+      FilePath("bar" GTEST_PATH_SEP_).RemoveTrailingPathSeparator().string());
 #if GTEST_HAS_ALT_PATH_SEP_
-  EXPECT_EQ("foo", FilePath("foo/").RemoveTrailingPathSeparator().string());
+  EXPECT_EQ("bar", FilePath("bar/").RemoveTrailingPathSeparator().string());
 #endif
 }
 
-// RemoveTrailingPathSeparator "foo/bar/" -> "foo/bar/"
+// RemoveTrailingPathSeparator "bar/bar/" -> "bar/bar/"
 TEST(RemoveTrailingPathSeparatorTest, ShouldRemoveLastSeparator) {
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar",
-            FilePath("foo" GTEST_PATH_SEP_ "bar" GTEST_PATH_SEP_)
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar",
+            FilePath("bar" GTEST_PATH_SEP_ "bar" GTEST_PATH_SEP_)
                 .RemoveTrailingPathSeparator().string());
 }
 
-// RemoveTrailingPathSeparator "foo/bar" -> "foo/bar"
+// RemoveTrailingPathSeparator "bar/bar" -> "bar/bar"
 TEST(RemoveTrailingPathSeparatorTest, ShouldReturnUnmodified) {
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar",
-            FilePath("foo" GTEST_PATH_SEP_ "bar")
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar",
+            FilePath("bar" GTEST_PATH_SEP_ "bar")
                 .RemoveTrailingPathSeparator().string());
 }
 
@@ -418,14 +418,14 @@ TEST(DirectoryTest, CurrentDirectoryExists) {
 #endif  // GTEST_OS_WINDOWS
 }
 
-// "foo/bar" == foo//bar" == "foo///bar"
+// "bar/bar" == bar//bar" == "bar///bar"
 TEST(NormalizeTest, MultipleConsecutiveSepaparatorsInMidstring) {
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar",
-            FilePath("foo" GTEST_PATH_SEP_ "bar").string());
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar",
-            FilePath("foo" GTEST_PATH_SEP_ GTEST_PATH_SEP_ "bar").string());
-  EXPECT_EQ("foo" GTEST_PATH_SEP_ "bar",
-            FilePath("foo" GTEST_PATH_SEP_ GTEST_PATH_SEP_
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar",
+            FilePath("bar" GTEST_PATH_SEP_ "bar").string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar",
+            FilePath("bar" GTEST_PATH_SEP_ GTEST_PATH_SEP_ "bar").string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_ "bar",
+            FilePath("bar" GTEST_PATH_SEP_ GTEST_PATH_SEP_
                      GTEST_PATH_SEP_ "bar").string());
 }
 
@@ -439,28 +439,28 @@ TEST(NormalizeTest, MultipleConsecutiveSepaparatorsAtStringStart) {
     FilePath(GTEST_PATH_SEP_ GTEST_PATH_SEP_ GTEST_PATH_SEP_ "bar").string());
 }
 
-// "foo/" == foo//" == "foo///"
+// "bar/" == bar//" == "bar///"
 TEST(NormalizeTest, MultipleConsecutiveSepaparatorsAtStringEnd) {
-  EXPECT_EQ("foo" GTEST_PATH_SEP_,
-    FilePath("foo" GTEST_PATH_SEP_).string());
-  EXPECT_EQ("foo" GTEST_PATH_SEP_,
-    FilePath("foo" GTEST_PATH_SEP_ GTEST_PATH_SEP_).string());
-  EXPECT_EQ("foo" GTEST_PATH_SEP_,
-    FilePath("foo" GTEST_PATH_SEP_ GTEST_PATH_SEP_ GTEST_PATH_SEP_).string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_,
+    FilePath("bar" GTEST_PATH_SEP_).string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_,
+    FilePath("bar" GTEST_PATH_SEP_ GTEST_PATH_SEP_).string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_,
+    FilePath("bar" GTEST_PATH_SEP_ GTEST_PATH_SEP_ GTEST_PATH_SEP_).string());
 }
 
 #if GTEST_HAS_ALT_PATH_SEP_
 
 // Tests that separators at the end of the string are normalized
-// regardless of their combination (e.g. "foo\" =="foo/\" ==
-// "foo\\/").
+// regardless of their combination (e.g. "bar\" =="bar/\" ==
+// "bar\\/").
 TEST(NormalizeTest, MixAlternateSeparatorAtStringEnd) {
-  EXPECT_EQ("foo" GTEST_PATH_SEP_,
-            FilePath("foo/").string());
-  EXPECT_EQ("foo" GTEST_PATH_SEP_,
-            FilePath("foo" GTEST_PATH_SEP_ "/").string());
-  EXPECT_EQ("foo" GTEST_PATH_SEP_,
-            FilePath("foo//" GTEST_PATH_SEP_).string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_,
+            FilePath("bar/").string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_,
+            FilePath("bar" GTEST_PATH_SEP_ "/").string());
+  EXPECT_EQ("bar" GTEST_PATH_SEP_,
+            FilePath("bar//" GTEST_PATH_SEP_).string());
 }
 
 #endif
@@ -647,7 +647,7 @@ TEST(FilePathTest, IsAbsolutePath) {
 #if GTEST_OS_WINDOWS
   EXPECT_TRUE(FilePath("c:\\" GTEST_PATH_SEP_ "is_not"
                        GTEST_PATH_SEP_ "relative").IsAbsolutePath());
-  EXPECT_FALSE(FilePath("c:foo" GTEST_PATH_SEP_ "bar").IsAbsolutePath());
+  EXPECT_FALSE(FilePath("c:bar" GTEST_PATH_SEP_ "bar").IsAbsolutePath());
   EXPECT_TRUE(FilePath("c:/" GTEST_PATH_SEP_ "is_not"
                        GTEST_PATH_SEP_ "relative").IsAbsolutePath());
 #else

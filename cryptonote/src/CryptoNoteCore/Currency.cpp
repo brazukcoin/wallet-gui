@@ -1,6 +1,5 @@
 // Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers
-// Copyright (c) 2016, The Brazukcoinwanec developers
-// Copyright (c) 2018, The Brazukcoin developers
+// Copyright (c) 2016, The Brazukcoin developers
 //
 // This file is part of Bytecoin.
 //
@@ -708,7 +707,7 @@ namespace CryptoNote {
 			throw std::invalid_argument("val at upgradeWindow()");
 		}
 
-		m_currency.m_upgradeWindow = val;
+		m_currency.m_upgradeWindow = static_cast<uint32_t>(val);
 		return *this;
 	}
 

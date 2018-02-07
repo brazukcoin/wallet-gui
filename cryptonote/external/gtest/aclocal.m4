@@ -69,8 +69,8 @@ _AM_AUTOCONF_VERSION(m4_defn([AC_AUTOCONF_VERSION]))])
 
 # serial 1
 
-# For projects using AC_CONFIG_AUX_DIR([foo]), Autoconf sets
-# $ac_aux_dir to `$srcdir/foo'.  In other projects, it is set to
+# For projects using AC_CONFIG_AUX_DIR([bar]), Autoconf sets
+# $ac_aux_dir to `$srcdir/bar'.  In other projects, it is set to
 # `$srcdir', `$srcdir/..', or `$srcdir/../..'.
 #
 # Of course, Automake must honor this variable whenever it calls a

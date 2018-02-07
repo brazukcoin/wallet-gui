@@ -275,7 +275,7 @@ bool FilePath::IsAbsolutePath() const {
 // directory/base_name_<number>.extension if directory/base_name.extension
 // already exists. The number will be incremented until a pathname is found
 // that does not already exist.
-// Examples: 'dir/foo_test.xml' or 'dir/foo_test_1.xml'.
+// Examples: 'dir/bar_test.xml' or 'dir/bar_test_1.xml'.
 // There could be a race condition if two or more processes are calling this
 // function at the same time -- they could both pick the same filename.
 FilePath FilePath::GenerateUniqueFileName(const FilePath& directory,
@@ -345,7 +345,7 @@ FilePath FilePath::RemoveTrailingPathSeparator() const {
 }
 
 // Removes any redundant separators that might be in the pathname.
-// For example, "bar///foo" becomes "bar/foo". Does not eliminate other
+// For example, "bar///bar" becomes "bar/bar". Does not eliminate other
 // redundancies that might be in a pathname involving "." or "..".
 // TODO(wan@google.com): handle Windows network shares (e.g. \\server\share).
 void FilePath::Normalize() {

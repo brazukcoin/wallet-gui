@@ -178,9 +178,9 @@ using testing::internal::TypedTestCasePState;
 class TypedTestCasePStateTest : public Test {
  protected:
   virtual void SetUp() {
-    state_.AddTestName("foo.cc", 0, "FooTest", "A");
-    state_.AddTestName("foo.cc", 0, "FooTest", "B");
-    state_.AddTestName("foo.cc", 0, "FooTest", "C");
+    state_.AddTestName("bar.cc", 0, "FooTest", "A");
+    state_.AddTestName("bar.cc", 0, "FooTest", "B");
+    state_.AddTestName("bar.cc", 0, "FooTest", "C");
   }
 
   TypedTestCasePState state_;
@@ -189,7 +189,7 @@ class TypedTestCasePStateTest : public Test {
 TEST_F(TypedTestCasePStateTest, SucceedsForMatchingList) {
   const char* tests = "A, B, C";
   EXPECT_EQ(tests,
-            state_.VerifyRegisteredTestNames("foo.cc", 1, tests));
+            state_.VerifyRegisteredTestNames("bar.cc", 1, tests));
 }
 
 // Makes sure that the order of the tests and spaces around the names
@@ -197,36 +197,36 @@ TEST_F(TypedTestCasePStateTest, SucceedsForMatchingList) {
 TEST_F(TypedTestCasePStateTest, IgnoresOrderAndSpaces) {
   const char* tests = "A,C,   B";
   EXPECT_EQ(tests,
-            state_.VerifyRegisteredTestNames("foo.cc", 1, tests));
+            state_.VerifyRegisteredTestNames("bar.cc", 1, tests));
 }
 
 typedef TypedTestCasePStateTest TypedTestCasePStateDeathTest;
 
 TEST_F(TypedTestCasePStateDeathTest, DetectsDuplicates) {
   EXPECT_DEATH_IF_SUPPORTED(
-      state_.VerifyRegisteredTestNames("foo.cc", 1, "A, B, A, C"),
-      "foo\\.cc.1.?: Test A is listed more than once\\.");
+      state_.VerifyRegisteredTestNames("bar.cc", 1, "A, B, A, C"),
+      "bar\\.cc.1.?: Test A is listed more than once\\.");
 }
 
 TEST_F(TypedTestCasePStateDeathTest, DetectsExtraTest) {
   EXPECT_DEATH_IF_SUPPORTED(
-      state_.VerifyRegisteredTestNames("foo.cc", 1, "A, B, C, D"),
-      "foo\\.cc.1.?: No test named D can be found in this test case\\.");
+      state_.VerifyRegisteredTestNames("bar.cc", 1, "A, B, C, D"),
+      "bar\\.cc.1.?: No test named D can be found in this test case\\.");
 }
 
 TEST_F(TypedTestCasePStateDeathTest, DetectsMissedTest) {
   EXPECT_DEATH_IF_SUPPORTED(
-      state_.VerifyRegisteredTestNames("foo.cc", 1, "A, C"),
-      "foo\\.cc.1.?: You forgot to list test B\\.");
+      state_.VerifyRegisteredTestNames("bar.cc", 1, "A, C"),
+      "bar\\.cc.1.?: You forgot to list test B\\.");
 }
 
 // Tests that defining a test for a parameterized test case generates
 // a run-time error if the test case has been registered.
 TEST_F(TypedTestCasePStateDeathTest, DetectsTestAfterRegistration) {
-  state_.VerifyRegisteredTestNames("foo.cc", 1, "A, B, C");
+  state_.VerifyRegisteredTestNames("bar.cc", 1, "A, B, C");
   EXPECT_DEATH_IF_SUPPORTED(
-      state_.AddTestName("foo.cc", 2, "FooTest", "D"),
-      "foo\\.cc.2.?: Test D must be defined before REGISTER_TYPED_TEST_CASE_P"
+      state_.AddTestName("bar.cc", 2, "FooTest", "D"),
+      "bar\\.cc.2.?: Test D must be defined before REGISTER_TYPED_TEST_CASE_P"
       "\\(FooTest, \\.\\.\\.\\)\\.");
 }
 

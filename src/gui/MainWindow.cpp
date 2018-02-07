@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2016 The Cryptonote developers
 // Copyright (c) 2011-2013 The Bitcoin Core developers
 // Copyright (c) 2015-2016 XDN developers
-// Copyright (c) 2016-2017 The Brazukcoinwanec developers
+// Copyright (c) 2016-2017 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -116,7 +116,7 @@ void MainWindow::connectToSignals() {
 }
 
 void MainWindow::initUi() {
-  setWindowTitle(QString(tr("Brazukcoin Wallet %1")).arg(Settings::instance().getVersion()));
+  setWindowTitle(QString(tr("Karbo Wallet %1")).arg(Settings::instance().getVersion()));
 #ifdef Q_OS_WIN32
   createTrayIcon();
 #endif
@@ -890,7 +890,7 @@ void MainWindow::createTrayIcon()
 {
 #ifdef Q_OS_WIN
     m_trayIcon = new QSystemTrayIcon(QPixmap(":images/cryptonote"), this);
-    QString toolTip = QString(tr("Brazukcoin Wallet %1")).arg(Settings::instance().getVersion());
+    QString toolTip = QString(tr("Karbo Wallet %1")).arg(Settings::instance().getVersion());
     m_trayIcon->setToolTip(toolTip);
     m_trayIcon->show();
 #endif

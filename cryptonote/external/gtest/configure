@@ -791,7 +791,7 @@ x_includes=NONE
 x_libraries=NONE
 
 # Installation directory options.
-# These are left unexpanded so users can "make install exec_prefix=/foo"
+# These are left unexpanded so users can "make install exec_prefix=/bar"
 # and all the variables that are supposed to be based on exec_prefix
 # by default will actually change.
 # Use braces instead of parens because sh, perl, etc. also accept them.
@@ -5079,7 +5079,7 @@ $as_echo "$xsi_shell" >&6; }
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether the shell understands \"+=\"" >&5
 $as_echo_n "checking whether the shell understands \"+=\"... " >&6; }
 lt_shell_append=no
-( foo=bar; set foo baz; eval "$1+=\$2" && test "$foo" = barbaz ) \
+( bar=bar; set bar baz; eval "$1+=\$2" && test "$bar" = barbaz ) \
     >/dev/null 2>&1 \
   && lt_shell_append=yes
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $lt_shell_append" >&5
@@ -7295,7 +7295,7 @@ else
 	# non-empty at configure time, or by adding -multi_module to the
 	# link flags.
 	rm -rf libconftest.dylib*
-	echo "int foo(void){return 1;}" > conftest.c
+	echo "int bar(void){return 1;}" > conftest.c
 	echo "$LTCC $LTCFLAGS $LDFLAGS -o libconftest.dylib \
 -dynamiclib -Wl,-single_module conftest.c" >&5
 	$LTCC $LTCFLAGS $LDFLAGS -o libconftest.dylib \
@@ -9695,10 +9695,10 @@ if ${lt_cv_irix_exported_symbol+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   save_LDFLAGS="$LDFLAGS"
-	   LDFLAGS="$LDFLAGS -shared ${wl}-exported_symbol ${wl}foo ${wl}-update_registry ${wl}/dev/null"
+	   LDFLAGS="$LDFLAGS -shared ${wl}-exported_symbol ${wl}bar ${wl}-update_registry ${wl}/dev/null"
 	   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
-int foo (void) { return 0; }
+int bar (void) { return 0; }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
   lt_cv_irix_exported_symbol=yes
@@ -10247,7 +10247,7 @@ if test "$GCC" = yes; then
   done
   lt_search_path_spec=`$ECHO "$lt_tmp_lt_search_path_spec" | awk '
 BEGIN {RS=" "; FS="/|\n";} {
-  lt_foo="";
+  lt_bar="";
   lt_count=0;
   for (lt_i = NF; lt_i > 0; lt_i--) {
     if ($lt_i != "" && $lt_i != ".") {
@@ -10255,15 +10255,15 @@ BEGIN {RS=" "; FS="/|\n";} {
         lt_count++;
       } else {
         if (lt_count == 0) {
-          lt_foo="/" $lt_i lt_foo;
+          lt_bar="/" $lt_i lt_bar;
         } else {
           lt_count--;
         }
       }
     }
   }
-  if (lt_foo != "") { lt_freq[lt_foo]++; }
-  if (lt_freq[lt_foo] == 1) { print lt_foo; }
+  if (lt_bar != "") { lt_freq[lt_bar]++; }
+  if (lt_freq[lt_bar] == 1) { print lt_bar; }
 }'`
   # AWK program above erroneously prepends '/' to C:/dos/paths
   # for these hosts.
@@ -10706,7 +10706,7 @@ else
   lt_cv_shlibpath_overrides_runpath=no
     save_LDFLAGS=$LDFLAGS
     save_libdir=$libdir
-    eval "libdir=/foo; wl=\"$lt_prog_compiler_wl\"; \
+    eval "libdir=/bar; wl=\"$lt_prog_compiler_wl\"; \
 	 LDFLAGS=\"\$LDFLAGS $hardcode_libdir_flag_spec\""
     cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
@@ -14552,7 +14552,7 @@ else
   lt_cv_shlibpath_overrides_runpath=no
     save_LDFLAGS=$LDFLAGS
     save_libdir=$libdir
-    eval "libdir=/foo; wl=\"$lt_prog_compiler_wl_CXX\"; \
+    eval "libdir=/bar; wl=\"$lt_prog_compiler_wl_CXX\"; \
 	 LDFLAGS=\"\$LDFLAGS $hardcode_libdir_flag_spec_CXX\""
     cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
@@ -15583,8 +15583,8 @@ cat >confcache <<\_ACEOF
 # config.status only pays attention to the cache file if you give it
 # the --recheck option to rerun configure.
 #
-# `ac_cv_env_foo' variables (set or unset) will be overridden when
-# loading this file, other *unset* `ac_cv_foo' will be assigned the
+# `ac_cv_env_bar' variables (set or unset) will be overridden when
+# loading this file, other *unset* `ac_cv_bar' will be assigned the
 # following values.
 
 _ACEOF

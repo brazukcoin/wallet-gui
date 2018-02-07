@@ -1,179 +1,71 @@
-# Brazukcoin - true anonymous currency
+The Karbo (Karbovanets) is cryptocurrency of Ukrainian origin, just like Bitcoin but more anonymous and privacy centric with opaque and more analysis resistant blockchain. It is people's electronic cash, not connected to government or officials.
 
+## Building Karbo 
 
-###### In a world of increasing threats to liberty, Brazukcoin brings a new front of resistance in the form of **financial freedom**.
+### On *nix
 
-###### Brazukcoin is based on the time tested **blockchain** technology, and also has extreme **privacy** features in its Cryptonote algorithm.
+Dependencies: GCC 4.7.3 or later, CMake 2.8.6 or later, and Boost 1.55.
 
-###### The code is (and will always remain) free and **open-source**!
+You may download them from:
 
+* http://gcc.gnu.org/
+* http://www.cmake.org/
+* http://www.boost.org/
+* Alternatively, it may be possible to install them using a package manager.
 
+To build, change to a directory where this file is located, and run `make`. The resulting executables can be found in `build/release/src`.
 
+**Advanced options:**
 
-###### **Specifications:**
+* Parallel build: run `make -j<number of threads>` instead of `make`.
+* Debug build: run `make build-debug`.
+* Test suite: run `make test-release` to run tests in addition to building. Running `make test-debug` will do the same to the debug version.
+* Building with Clang: it may be possible to use Clang instead of GCC, but this may not work everywhere. To build, run `export CC=clang CXX=clang++` before running `make`.
 
+### On Windows
+Dependencies: MSVC 2013 or later, CMake 2.8.6 or later, and Boost 1.55. You may download them from:
 
-- Ticker: BZK
-- NO Pre-mine
-- Mining algorithm: CryptoNight (it enables a truly anonymous and decentralized blockchain-based currency)
-- Max supply: 10 million coins (+ tail emission ~1% yearly)
-- Block reward: Initial reward of ~38 BZK
-- Block target time: Around 4 minutes
-- Difficulty: Retargets at every block
-- Low transaction fee: 0.0001 BZK
-- P2P Port: 44044
-- Rpc Port: 44043
+* http://www.microsoft.com/
+* http://www.cmake.org/
+* http://www.boost.org/
 
-
-
-
-###### **Website:**
-
-
-[**http://www.brazukcoin.space**](**http://www.brazukcoin.space**)
-
-
-
-
-###### **Mining Pools:**
-
-
-[**http://bzk.hpool.net**](**http://bzk.hpool.net**)
-
-[**http://pool.brazukcoin.space**](**http://pool.brazukcoin.space**)
-
-
-
-
-###### **Block Explorer:**
-
-
-[**http://block.brazukcoin.space**](**http://block.brazukcoin.space**)
-
-
-*Thanks katorisenko!*
-
-
-
-
-###### **Get your Brazuk wallet here:**
-
-
-Install the pre-compiled executables for **Windows**:
-
-[**https://github.com/brazukcoin/brazukcoin/releases/**](**https://github.com/brazukcoin/brazukcoin/releases/**)
-
-
-- Download the .zip archive.
-- Extract the files.
-- Run brazukcoind.exe (to sync the blockchain) and let it running.
-- Run simplewallet.exe to create your wallet.
-- type 'help' (no quotes) for further instructions on how to mine, transfer money, get your private key, etc.
-
-**Important: Write down the seed information on paper, protect your *.wallet file, and never forget your password!**
-
-
-
-
-###### You can also compile directly from the source code:
-
-
-**On Linux:**
-
-1 - Build your environment:
+To build, change to a directory where this file is located, and run theas commands: 
 ```
-~$ sudo apt-get update ~$ sudo apt-get install build-essential git cmake libboost-all-dev
+mkdir build
+cd build
+cmake -G "Visual Studio 12 Win64" ..
 ```
 
-2 - Download Brazukcoin's source code:
-```
-~$ git clone https://github.com/brazukcoin/brazukcoin.git
-```
+And then do Build.
+Good luck!
 
-3 - Build the binaries:
-```
-~$ cd brazukcoin ~/brazukcoin$ make
-```
+### Building for Android on Linux
 
-4 - Sync the blockchain:
+Set up the 32 bit toolchain
+Download and extract the Android SDK and NDK
 ```
-~/brazukcoin$ cd build/release/src/ ~/brazukcoin/build/release/src$ ./brazukcoind --log-level=3
+android-ndk-r15c/build/tools/make_standalone_toolchain.py --api 21 --stl=libc++ --arch arm --install-dir /opt/android/tool32
 ```
 
-5 - Create your wallet (run 'simplewallet' on a new terminal because you need the brazukcoin daemon running):
+Download and setup the Boost 1.65.1 source
 ```
-~/brazukcoin/build/release/src$ ./simplewallet
+wget https://sourceforge.net/projects/boost/files/boost/1.65.1/boost_1_65_1.tar.bz2/download -O boost_1_65_1.tar.bz2
+tar xjf boost_1_65_1.tar.bz2
+cd boost_1_65_1
+./bootstrap.sh
 ```
-IMPORTANT: Don't forget you password! Write down you seed information, your private keys, and keep your *.wallet file safe, or you might lose your money!
+apply patch from external/boost1_65_1/libs/filesystem/src
 
-6 - Start mining your coins:
+Build Boost with the 32 bit toolchain
 ```
-type 'start_mining' (no quotes).
-
-For more commands, type 'help'
-```
-
-
-**On Windows:**
-
-
-1 - Install Microsoft Visual Studio Community 2013
-```
-https://www.visualstudio.com/en-us/news/releasenotes/vs2013-community-vs
-Click on 'Download Older Version' and then on 'Visual Studio Community with Update 5'
-
-Note: You'll have to create a free account with Microsoft MSDN to proceed with the download.
+export PATH=/opt/android/tool32/arm-linux-androideabi/bin:/opt/android/tool32/bin:$PATH
+./b2 abi=aapcs architecture=arm binary-format=elf address-model=32 link=static runtime-link=static --with-chrono --with-date_time --with-filesystem --with-program_options --with-regex --with-serialization --with-system --with-thread --with-context --with-coroutine --with-atomic --build-dir=android32 --stagedir=android32 toolset=clang threading=multi threadapi=pthread target-os=android --reconfigure stage
 ```
 
-2 - Install the latest CMake
+Build Karbo for 32 bit Android
 ```
-https://cmake.org/download
-
-During installation choose 'Add cmake to your system path',
+mkdir -p build/release.android32
+cd build/release.android32
+CC=clang CXX=clang++ cmake -D BUILD_TESTS=OFF -D ARCH="armv7-a" -ldl -D STATIC=ON -D BUILD_64=OFF -D CMAKE_BUILD_TYPE=release -D ANDROID=true -D BUILD_TAG="android" -D BOOST_ROOT=/opt/android/boost_1_65_1 -D BOOST_LIBRARYDIR=/opt/android/boost_1_65_1/android32/lib -D CMAKE_POSITION_INDEPENDENT_CODE:BOOL=true -D BOOST_IGNORE_SYSTEM_PATHS_DEFAULT=ON ../..
+make SimpleWallet
 ```
-
-3 - Download and compile Boost 5.7.0 C++ Libraries
-```
-https://sourceforge.net/projects/boost/files/boost/1.57.0/boost_1_57_0.zip/download
-
-Extract the zip archive.
-
-Compile Boost 5.7.0
-
-Run Windows command prompt ('cmd')
-
-'cd' to where you extracted boost__1_57_0
-
-Run 'bootstrap.bat'
-
-Run 'b2 --toolset=msvc variant=release link=static threading=multi runtime-link=static address-model=64'
-```
-
-4 - Install Git distributed version control system
-```
-https://git-scm.com/download/win
-```
-
-5 - Download brazukcoin source code to your computer
-```
-Run 'git shell' or 'git bash'
-```
-Clone repository
-type 'git clone https://github.com/brazukcoin/brazukcoin.git'
-```
-
-Now finally compile Brazukcoin!
-```
-cd brazukcoin
-mkdir build -- Create 'build' directory.
-cd build    -- Change to build Directory.
-cmake -G "Visual Studio 12 Win64" -DBOOST_ROOT=c:\boost_1_57_0 -DBOOST_LIBRARY_DIR=c:\boost_1_57_0\stage\lib ..
-msbuild Brazukcoin.sln /p:Configuration=release
-```
-
-Done! Find you binaries in ..\brazukcoin\build\src\release\
-
-
-
-**Good luck!**
-

@@ -30,8 +30,8 @@ Compiler flag queries output the union of the sets of flags when combined.
  Examples:
   gtest-config --min-version=1.0 || echo "Insufficient Google Test version."
 
-  g++ $(gtest-config --cppflags --cxxflags) -o foo.o -c foo.cpp
-  g++ $(gtest-config --ldflags --libs) -o foo foo.o
+  g++ $(gtest-config --cppflags --cxxflags) -o bar.o -c bar.cpp
+  g++ $(gtest-config --ldflags --libs) -o bar bar.o
 
   # When using a built but not installed Google Test:
   g++ $(../../my_gtest_build/scripts/gtest-config ...) ...

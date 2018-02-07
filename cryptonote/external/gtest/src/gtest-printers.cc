@@ -276,7 +276,7 @@ template <typename CharType>
 static void UniversalPrintCharArray(
     const CharType* begin, size_t len, ostream* os) {
   // The code
-  //   const char kFoo[] = "foo";
+  //   const char kFoo[] = "bar";
   // generates an array of 4, not 3, elements, with the last one being '\0'.
   //
   // Therefore when printing a char array, we don't print the last element if

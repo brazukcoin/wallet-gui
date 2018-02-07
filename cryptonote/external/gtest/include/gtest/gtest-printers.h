@@ -40,10 +40,10 @@
 // defining either operator<<() or PrintTo() in the namespace that
 // defines T.  More specifically, the FIRST defined function in the
 // following list will be used (assuming T is defined in namespace
-// foo):
+// bar):
 //
-//   1. foo::PrintTo(const T&, ostream*)
-//   2. operator<<(ostream&, const T&) defined in either foo or the
+//   1. bar::PrintTo(const T&, ostream*)
+//   2. operator<<(ostream&, const T&) defined in either bar or the
 //      global namespace.
 //
 // If none of the above is defined, it will print the debug string of
@@ -229,17 +229,17 @@ void DefaultPrintNonContainerTo(const T& value, ::std::ostream* os) {
   // gcc 3.3 fails to compile due to a compiler bug.
   using namespace ::testing::internal2;  // NOLINT
 
-  // Assuming T is defined in namespace foo, in the next statement,
+  // Assuming T is defined in namespace bar, in the next statement,
   // the compiler will consider all of:
   //
-  //   1. foo::operator<< (thanks to Koenig look-up),
+  //   1. bar::operator<< (thanks to Koenig look-up),
   //   2. ::operator<< (as the current namespace is enclosed in ::),
   //   3. testing::internal2::operator<< (thanks to the using statement above).
   //
   // The operator<< whose type matches T best will be picked.
   //
   // We deliberately allow #2 to be a candidate, as sometimes it's
-  // impossible to define #1 (e.g. when foo is ::std, defining
+  // impossible to define #1 (e.g. when bar is ::std, defining
   // anything in it is undefined behavior unless you are a compiler
   // vendor.).
   *os << value;

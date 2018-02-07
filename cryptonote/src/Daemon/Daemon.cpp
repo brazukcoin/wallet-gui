@@ -1,7 +1,6 @@
 // Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers
 // Copyright (c) 2016, The Forknote developers
-// Copyright (c) 2016, The Brazukcoinwanec developers
-// Copyright (c) 2018, The Brazukcoin developers
+// Copyright (c) 2016, The Brazukcoin developers
 // This file is part of Bytecoin.
 //
 // Bytecoin is free software: you can redistribute it and/or modify

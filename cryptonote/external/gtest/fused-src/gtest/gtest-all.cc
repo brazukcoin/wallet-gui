@@ -2470,10 +2470,10 @@ namespace internal {
 // (e.g. ASSERT_EQ, EXPECT_STREQ, etc) failure.
 //
 // The first four parameters are the expressions used in the assertion
-// and their values, as strings.  For example, for ASSERT_EQ(foo, bar)
-// where foo is 5 and bar is 6, we have:
+// and their values, as strings.  For example, for ASSERT_EQ(bar, bar)
+// where bar is 5 and bar is 6, we have:
 //
-//   expected_expression: "foo"
+//   expected_expression: "bar"
 //   actual_expression:   "bar"
 //   expected_value:      "5"
 //   actual_value:        "6"
@@ -8109,7 +8109,7 @@ bool FilePath::IsAbsolutePath() const {
 // directory/base_name_<number>.extension if directory/base_name.extension
 // already exists. The number will be incremented until a pathname is found
 // that does not already exist.
-// Examples: 'dir/foo_test.xml' or 'dir/foo_test_1.xml'.
+// Examples: 'dir/bar_test.xml' or 'dir/bar_test_1.xml'.
 // There could be a race condition if two or more processes are calling this
 // function at the same time -- they could both pick the same filename.
 FilePath FilePath::GenerateUniqueFileName(const FilePath& directory,
@@ -8179,7 +8179,7 @@ FilePath FilePath::RemoveTrailingPathSeparator() const {
 }
 
 // Removes any redundant separators that might be in the pathname.
-// For example, "bar///foo" becomes "bar/foo". Does not eliminate other
+// For example, "bar///bar" becomes "bar/bar". Does not eliminate other
 // redundancies that might be in a pathname involving "." or "..".
 // TODO(wan@google.com): handle Windows network shares (e.g. \\server\share).
 void FilePath::Normalize() {
@@ -8914,7 +8914,7 @@ void Abort() {
 #endif  // GTEST_OS_WINDOWS_MOBILE
 
 // Returns the name of the environment variable corresponding to the
-// given flag.  For example, FlagToEnvVar("foo") will return
+// given flag.  For example, FlagToEnvVar("bar") will return
 // "GTEST_FOO" in the open-source version.
 static std::string FlagToEnvVar(const char* flag) {
   const std::string full_flag =
@@ -9289,7 +9289,7 @@ template <typename CharType>
 static void UniversalPrintCharArray(
     const CharType* begin, size_t len, ostream* os) {
   // The code
-  //   const char kFoo[] = "foo";
+  //   const char kFoo[] = "bar";
   // generates an array of 4, not 3, elements, with the last one being '\0'.
   //
   // Therefore when printing a char array, we don't print the last element if

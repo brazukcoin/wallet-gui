@@ -461,13 +461,13 @@ TEST(BoolTest, BoolWorks) {
 
 // Tests that Combine() with two parameters generates the expected sequence.
 TEST(CombineTest, CombineWithTwoParameters) {
-  const char* foo = "foo";
+  const char* bar = "bar";
   const char* bar = "bar";
   const ParamGenerator<tuple<const char*, int> > gen =
-      Combine(Values(foo, bar), Values(3, 4));
+      Combine(Values(bar, bar), Values(3, 4));
 
   tuple<const char*, int> expected_values[] = {
-    make_tuple(foo, 3), make_tuple(foo, 4),
+    make_tuple(bar, 3), make_tuple(bar, 4),
     make_tuple(bar, 3), make_tuple(bar, 4)};
   VerifyGenerator(gen, expected_values);
 }
@@ -526,10 +526,10 @@ TEST(CombineTest, CombineWithSecondParameterEmptyRange) {
 // Edge case. Tests that combine works with the maximum number
 // of parameters supported by Google Test (currently 10).
 TEST(CombineTest, CombineWithMaxNumberOfParameters) {
-  const char* foo = "foo";
+  const char* bar = "bar";
   const char* bar = "bar";
   const ParamGenerator<tuple<const char*, int, int, int, int, int, int, int,
-                             int, int> > gen = Combine(Values(foo, bar),
+                             int, int> > gen = Combine(Values(bar, bar),
                                                        Values(1), Values(2),
                                                        Values(3), Values(4),
                                                        Values(5), Values(6),
@@ -537,7 +537,7 @@ TEST(CombineTest, CombineWithMaxNumberOfParameters) {
                                                        Values(9));
 
   tuple<const char*, int, int, int, int, int, int, int, int, int>
-      expected_values[] = {make_tuple(foo, 1, 2, 3, 4, 5, 6, 7, 8, 9),
+      expected_values[] = {make_tuple(bar, 1, 2, 3, 4, 5, 6, 7, 8, 9),
                            make_tuple(bar, 1, 2, 3, 4, 5, 6, 7, 8, 9)};
   VerifyGenerator(gen, expected_values);
 }

@@ -144,11 +144,11 @@ TEST_F(StreamingListenerTest, OnTestEnd) {
 TEST_F(StreamingListenerTest, OnTestPartResult) {
   *output() = "";
   streamer_.OnTestPartResult(TestPartResult(
-      TestPartResult::kFatalFailure, "foo.cc", 42, "failed=\n&%"));
+      TestPartResult::kFatalFailure, "bar.cc", 42, "failed=\n&%"));
 
   // Meta characters in the failure message should be properly escaped.
   EXPECT_EQ(
-      "event=TestPartResult&file=foo.cc&line=42&message=failed%3D%0A%26%25\n",
+      "event=TestPartResult&file=bar.cc&line=42&message=failed%3D%0A%26%25\n",
       *output());
 }
 
@@ -1006,14 +1006,14 @@ TEST(AssertHelperTest, AssertHelperIsSmall) {
 
 // Tests String::EndsWithCaseInsensitive().
 TEST(StringTest, EndsWithCaseInsensitive) {
-  EXPECT_TRUE(String::EndsWithCaseInsensitive("foobar", "BAR"));
-  EXPECT_TRUE(String::EndsWithCaseInsensitive("foobaR", "bar"));
-  EXPECT_TRUE(String::EndsWithCaseInsensitive("foobar", ""));
+  EXPECT_TRUE(String::EndsWithCaseInsensitive("barbar", "BAR"));
+  EXPECT_TRUE(String::EndsWithCaseInsensitive("barbaR", "bar"));
+  EXPECT_TRUE(String::EndsWithCaseInsensitive("barbar", ""));
   EXPECT_TRUE(String::EndsWithCaseInsensitive("", ""));
 
-  EXPECT_FALSE(String::EndsWithCaseInsensitive("Foobar", "foo"));
-  EXPECT_FALSE(String::EndsWithCaseInsensitive("foobar", "Foo"));
-  EXPECT_FALSE(String::EndsWithCaseInsensitive("", "foo"));
+  EXPECT_FALSE(String::EndsWithCaseInsensitive("Foobar", "bar"));
+  EXPECT_FALSE(String::EndsWithCaseInsensitive("barbar", "Foo"));
+  EXPECT_FALSE(String::EndsWithCaseInsensitive("", "bar"));
 }
 
 // C++Builder's preprocessor is buggy; it fails to expand macros that
@@ -1026,11 +1026,11 @@ TEST(StringTest, CaseInsensitiveWideCStringEquals) {
   EXPECT_TRUE(String::CaseInsensitiveWideCStringEquals(NULL, NULL));
   EXPECT_FALSE(String::CaseInsensitiveWideCStringEquals(kNull, L""));
   EXPECT_FALSE(String::CaseInsensitiveWideCStringEquals(L"", kNull));
-  EXPECT_FALSE(String::CaseInsensitiveWideCStringEquals(kNull, L"foobar"));
-  EXPECT_FALSE(String::CaseInsensitiveWideCStringEquals(L"foobar", kNull));
-  EXPECT_TRUE(String::CaseInsensitiveWideCStringEquals(L"foobar", L"foobar"));
-  EXPECT_TRUE(String::CaseInsensitiveWideCStringEquals(L"foobar", L"FOOBAR"));
-  EXPECT_TRUE(String::CaseInsensitiveWideCStringEquals(L"FOOBAR", L"foobar"));
+  EXPECT_FALSE(String::CaseInsensitiveWideCStringEquals(kNull, L"barbar"));
+  EXPECT_FALSE(String::CaseInsensitiveWideCStringEquals(L"barbar", kNull));
+  EXPECT_TRUE(String::CaseInsensitiveWideCStringEquals(L"barbar", L"barbar"));
+  EXPECT_TRUE(String::CaseInsensitiveWideCStringEquals(L"barbar", L"FOOBAR"));
+  EXPECT_TRUE(String::CaseInsensitiveWideCStringEquals(L"FOOBAR", L"barbar"));
 }
 
 #if GTEST_OS_WINDOWS
@@ -1040,7 +1040,7 @@ TEST(StringTest, ShowWideCString) {
   EXPECT_STREQ("(null)",
                String::ShowWideCString(NULL).c_str());
   EXPECT_STREQ("", String::ShowWideCString(L"").c_str());
-  EXPECT_STREQ("foo", String::ShowWideCString(L"foo").c_str());
+  EXPECT_STREQ("bar", String::ShowWideCString(L"bar").c_str());
 }
 
 # if GTEST_OS_WINDOWS_MOBILE
@@ -1351,13 +1351,13 @@ class TestResultTest : public Test {
   virtual void SetUp() {
     // pr1 is for success.
     pr1 = new TestPartResult(TestPartResult::kSuccess,
-                             "foo/bar.cc",
+                             "bar/bar.cc",
                              10,
                              "Success!");
 
     // pr2 is for fatal failure.
     pr2 = new TestPartResult(TestPartResult::kFatalFailure,
-                             "foo/bar.cc",
+                             "bar/bar.cc",
                              -1,  // This line number means "unknown"
                              "Failure!");
 
@@ -1585,7 +1585,7 @@ class GTestFlagSaverTest : public Test {
     GTEST_FLAG(death_test_use_fork) = true;
     GTEST_FLAG(filter) = "abc";
     GTEST_FLAG(list_tests) = true;
-    GTEST_FLAG(output) = "xml:foo.xml";
+    GTEST_FLAG(output) = "xml:bar.xml";
     GTEST_FLAG(print_time) = false;
     GTEST_FLAG(random_seed) = 1;
     GTEST_FLAG(repeat) = 100;
@@ -3426,14 +3426,14 @@ TEST_F(NoFatalFailureTest, MessageIsStreamable) {
   TestPartResultArray gtest_failures;
   {
     ScopedFakeTestPartResultReporter gtest_reporter(&gtest_failures);
-    EXPECT_NO_FATAL_FAILURE(FAIL() << "foo") << "my message";
+    EXPECT_NO_FATAL_FAILURE(FAIL() << "bar") << "my message";
   }
   ASSERT_EQ(2, gtest_failures.size());
   EXPECT_EQ(TestPartResult::kNonFatalFailure,
             gtest_failures.GetTestPartResult(0).type());
   EXPECT_EQ(TestPartResult::kNonFatalFailure,
             gtest_failures.GetTestPartResult(1).type());
-  EXPECT_PRED_FORMAT2(testing::IsSubstring, "foo",
+  EXPECT_PRED_FORMAT2(testing::IsSubstring, "bar",
                       gtest_failures.GetTestPartResult(0).message());
   EXPECT_PRED_FORMAT2(testing::IsSubstring, "my message",
                       gtest_failures.GetTestPartResult(1).message());
@@ -3443,28 +3443,28 @@ TEST_F(NoFatalFailureTest, MessageIsStreamable) {
 
 // Tests EqFailure(), used for implementing *EQ* assertions.
 TEST(AssertionTest, EqFailure) {
-  const std::string foo_val("5"), bar_val("6");
+  const std::string bar_val("5"), bar_val("6");
   const std::string msg1(
-      EqFailure("foo", "bar", foo_val, bar_val, false)
+      EqFailure("bar", "bar", bar_val, bar_val, false)
       .failure_message());
   EXPECT_STREQ(
       "Value of: bar\n"
       "  Actual: 6\n"
-      "Expected: foo\n"
+      "Expected: bar\n"
       "Which is: 5",
       msg1.c_str());
 
   const std::string msg2(
-      EqFailure("foo", "6", foo_val, bar_val, false)
+      EqFailure("bar", "6", bar_val, bar_val, false)
       .failure_message());
   EXPECT_STREQ(
       "Value of: 6\n"
-      "Expected: foo\n"
+      "Expected: bar\n"
       "Which is: 5",
       msg2.c_str());
 
   const std::string msg3(
-      EqFailure("5", "bar", foo_val, bar_val, false)
+      EqFailure("5", "bar", bar_val, bar_val, false)
       .failure_message());
   EXPECT_STREQ(
       "Value of: bar\n"
@@ -3473,35 +3473,35 @@ TEST(AssertionTest, EqFailure) {
       msg3.c_str());
 
   const std::string msg4(
-      EqFailure("5", "6", foo_val, bar_val, false).failure_message());
+      EqFailure("5", "6", bar_val, bar_val, false).failure_message());
   EXPECT_STREQ(
       "Value of: 6\n"
       "Expected: 5",
       msg4.c_str());
 
   const std::string msg5(
-      EqFailure("foo", "bar",
+      EqFailure("bar", "bar",
                 std::string("\"x\""), std::string("\"y\""),
                 true).failure_message());
   EXPECT_STREQ(
       "Value of: bar\n"
       "  Actual: \"y\"\n"
-      "Expected: foo (ignoring case)\n"
+      "Expected: bar (ignoring case)\n"
       "Which is: \"x\"",
       msg5.c_str());
 }
 
 // Tests AppendUserMessage(), used for implementing the *EQ* macros.
 TEST(AssertionTest, AppendUserMessage) {
-  const std::string foo("foo");
+  const std::string bar("bar");
 
   Message msg;
-  EXPECT_STREQ("foo",
-               AppendUserMessage(foo, msg).c_str());
+  EXPECT_STREQ("bar",
+               AppendUserMessage(bar, msg).c_str());
 
   msg << "bar";
-  EXPECT_STREQ("foo\nbar",
-               AppendUserMessage(foo, msg).c_str());
+  EXPECT_STREQ("bar\nbar",
+               AppendUserMessage(bar, msg).c_str());
 }
 
 #ifdef __BORLANDC__
@@ -4549,10 +4549,10 @@ TEST(MacroTest, ADD_FAILURE) {
 TEST(MacroTest, ADD_FAILURE_AT) {
   // Verifies that ADD_FAILURE_AT does generate a nonfatal failure and
   // the failure message contains the user-streamed part.
-  EXPECT_NONFATAL_FAILURE(ADD_FAILURE_AT("foo.cc", 42) << "Wrong!", "Wrong!");
+  EXPECT_NONFATAL_FAILURE(ADD_FAILURE_AT("bar.cc", 42) << "Wrong!", "Wrong!");
 
   // Verifies that the user-streamed part is optional.
-  EXPECT_NONFATAL_FAILURE(ADD_FAILURE_AT("foo.cc", 42), "Failed");
+  EXPECT_NONFATAL_FAILURE(ADD_FAILURE_AT("bar.cc", 42), "Failed");
 
   // Unfortunately, we cannot verify that the failure message contains
   // the right file path and line number the same way, as
@@ -4652,7 +4652,7 @@ TEST(EqAssertionTest, StdString) {
                           "\"test\"");
 
   // Compares an std::string to a char* that has different content.
-  char* const p1 = const_cast<char*>("foo");
+  char* const p1 = const_cast<char*>("bar");
   EXPECT_NONFATAL_FAILURE(EXPECT_EQ(::std::string("bar"), p1),
                           "p1");
 
@@ -4696,7 +4696,7 @@ TEST(EqAssertionTest, StdWideString) {
   // Compares a wchar_t* to an std::wstring that has different
   // content.
   EXPECT_FATAL_FAILURE({  // NOLINT
-    ASSERT_EQ(const_cast<wchar_t*>(L"foo"), ::std::wstring(L"bar"));
+    ASSERT_EQ(const_cast<wchar_t*>(L"bar"), ::std::wstring(L"bar"));
   }, "");
 }
 
@@ -4726,7 +4726,7 @@ TEST(EqAssertionTest, GlobalString) {
 
   // Compares a ::string to a char* that has different content.
   EXPECT_FATAL_FAILURE({  // NOLINT
-    ASSERT_EQ(::string("bar"), const_cast<char*>("foo"));
+    ASSERT_EQ(::string("bar"), const_cast<char*>("bar"));
   }, "");
 }
 
@@ -4753,7 +4753,7 @@ TEST(EqAssertionTest, GlobalWideString) {
   }, "Test\\x8119");
 
   // Compares a wchar_t* to a ::wstring that has different content.
-  wchar_t* const p1 = const_cast<wchar_t*>(L"foo");
+  wchar_t* const p1 = const_cast<wchar_t*>(L"bar");
   EXPECT_NONFATAL_FAILURE(EXPECT_EQ(p1, ::wstring(L"bar")),
                           "bar");
 
@@ -4912,13 +4912,13 @@ TEST(FRIEND_TEST_Test, TEST) {
 // The fixture needed to test using FRIEND_TEST with TEST_F.
 class FRIEND_TEST_Test2 : public Test {
  protected:
-  Foo foo;
+  Foo bar;
 };
 
 // Tests that the FRIEND_TEST declaration allows a TEST_F to access a
 // class's private members.  This should compile.
 TEST_F(FRIEND_TEST_Test2, TEST_F) {
-  ASSERT_EQ(1, foo.Bar());
+  ASSERT_EQ(1, bar.Bar());
 }
 
 // Tests the life cycle of Test objects.
@@ -5547,12 +5547,12 @@ TEST_F(InitGoogleTestTest, Empty) {
 // Tests parsing a command line that has no flag.
 TEST_F(InitGoogleTestTest, NoFlag) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5562,13 +5562,13 @@ TEST_F(InitGoogleTestTest, NoFlag) {
 // Tests parsing a bad --gtest_filter flag.
 TEST_F(InitGoogleTestTest, FilterBad) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_filter",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_filter",
     NULL
   };
@@ -5579,13 +5579,13 @@ TEST_F(InitGoogleTestTest, FilterBad) {
 // Tests parsing an empty --gtest_filter flag.
 TEST_F(InitGoogleTestTest, FilterEmpty) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_filter=",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5595,13 +5595,13 @@ TEST_F(InitGoogleTestTest, FilterEmpty) {
 // Tests parsing a non-empty --gtest_filter flag.
 TEST_F(InitGoogleTestTest, FilterNonEmpty) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_filter=abc",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5611,13 +5611,13 @@ TEST_F(InitGoogleTestTest, FilterNonEmpty) {
 // Tests parsing --gtest_break_on_failure.
 TEST_F(InitGoogleTestTest, BreakOnFailureWithoutValue) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_break_on_failure",
     NULL
 };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5627,13 +5627,13 @@ TEST_F(InitGoogleTestTest, BreakOnFailureWithoutValue) {
 // Tests parsing --gtest_break_on_failure=0.
 TEST_F(InitGoogleTestTest, BreakOnFailureFalse_0) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_break_on_failure=0",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5643,13 +5643,13 @@ TEST_F(InitGoogleTestTest, BreakOnFailureFalse_0) {
 // Tests parsing --gtest_break_on_failure=f.
 TEST_F(InitGoogleTestTest, BreakOnFailureFalse_f) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_break_on_failure=f",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5659,13 +5659,13 @@ TEST_F(InitGoogleTestTest, BreakOnFailureFalse_f) {
 // Tests parsing --gtest_break_on_failure=F.
 TEST_F(InitGoogleTestTest, BreakOnFailureFalse_F) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_break_on_failure=F",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5676,13 +5676,13 @@ TEST_F(InitGoogleTestTest, BreakOnFailureFalse_F) {
 // definition.
 TEST_F(InitGoogleTestTest, BreakOnFailureTrue) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_break_on_failure=1",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5692,13 +5692,13 @@ TEST_F(InitGoogleTestTest, BreakOnFailureTrue) {
 // Tests parsing --gtest_catch_exceptions.
 TEST_F(InitGoogleTestTest, CatchExceptions) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_catch_exceptions",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5708,13 +5708,13 @@ TEST_F(InitGoogleTestTest, CatchExceptions) {
 // Tests parsing --gtest_death_test_use_fork.
 TEST_F(InitGoogleTestTest, DeathTestUseFork) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_death_test_use_fork",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5725,14 +5725,14 @@ TEST_F(InitGoogleTestTest, DeathTestUseFork) {
 // expected behavior is that the one coming last takes precedence.
 TEST_F(InitGoogleTestTest, DuplicatedFlags) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_filter=a",
     "--gtest_filter=b",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5742,7 +5742,7 @@ TEST_F(InitGoogleTestTest, DuplicatedFlags) {
 // Tests having an unrecognized flag on the command line.
 TEST_F(InitGoogleTestTest, UnrecognizedFlag) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_break_on_failure",
     "bar",  // Unrecognized by Google Test.
     "--gtest_filter=b",
@@ -5750,7 +5750,7 @@ TEST_F(InitGoogleTestTest, UnrecognizedFlag) {
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     "bar",
     NULL
   };
@@ -5764,13 +5764,13 @@ TEST_F(InitGoogleTestTest, UnrecognizedFlag) {
 // Tests having a --gtest_list_tests flag
 TEST_F(InitGoogleTestTest, ListTestsFlag) {
     const char* argv[] = {
-      "foo.exe",
+      "bar.exe",
       "--gtest_list_tests",
       NULL
     };
 
     const char* argv2[] = {
-      "foo.exe",
+      "bar.exe",
       NULL
     };
 
@@ -5780,13 +5780,13 @@ TEST_F(InitGoogleTestTest, ListTestsFlag) {
 // Tests having a --gtest_list_tests flag with a "true" value
 TEST_F(InitGoogleTestTest, ListTestsTrue) {
     const char* argv[] = {
-      "foo.exe",
+      "bar.exe",
       "--gtest_list_tests=1",
       NULL
     };
 
     const char* argv2[] = {
-      "foo.exe",
+      "bar.exe",
       NULL
     };
 
@@ -5796,13 +5796,13 @@ TEST_F(InitGoogleTestTest, ListTestsTrue) {
 // Tests having a --gtest_list_tests flag with a "false" value
 TEST_F(InitGoogleTestTest, ListTestsFalse) {
     const char* argv[] = {
-      "foo.exe",
+      "bar.exe",
       "--gtest_list_tests=0",
       NULL
     };
 
     const char* argv2[] = {
-      "foo.exe",
+      "bar.exe",
       NULL
     };
 
@@ -5812,13 +5812,13 @@ TEST_F(InitGoogleTestTest, ListTestsFalse) {
 // Tests parsing --gtest_list_tests=f.
 TEST_F(InitGoogleTestTest, ListTestsFalse_f) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_list_tests=f",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5828,13 +5828,13 @@ TEST_F(InitGoogleTestTest, ListTestsFalse_f) {
 // Tests parsing --gtest_list_tests=F.
 TEST_F(InitGoogleTestTest, ListTestsFalse_F) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_list_tests=F",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5844,13 +5844,13 @@ TEST_F(InitGoogleTestTest, ListTestsFalse_F) {
 // Tests parsing --gtest_output (invalid).
 TEST_F(InitGoogleTestTest, OutputEmpty) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_output",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_output",
     NULL
   };
@@ -5861,13 +5861,13 @@ TEST_F(InitGoogleTestTest, OutputEmpty) {
 // Tests parsing --gtest_output=xml
 TEST_F(InitGoogleTestTest, OutputXml) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_output=xml",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5877,13 +5877,13 @@ TEST_F(InitGoogleTestTest, OutputXml) {
 // Tests parsing --gtest_output=xml:file
 TEST_F(InitGoogleTestTest, OutputXmlFile) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_output=xml:file",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5893,13 +5893,13 @@ TEST_F(InitGoogleTestTest, OutputXmlFile) {
 // Tests parsing --gtest_output=xml:directory/path/
 TEST_F(InitGoogleTestTest, OutputXmlDirectory) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_output=xml:directory/path/",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5910,13 +5910,13 @@ TEST_F(InitGoogleTestTest, OutputXmlDirectory) {
 // Tests having a --gtest_print_time flag
 TEST_F(InitGoogleTestTest, PrintTimeFlag) {
     const char* argv[] = {
-      "foo.exe",
+      "bar.exe",
       "--gtest_print_time",
       NULL
     };
 
     const char* argv2[] = {
-      "foo.exe",
+      "bar.exe",
       NULL
     };
 
@@ -5926,13 +5926,13 @@ TEST_F(InitGoogleTestTest, PrintTimeFlag) {
 // Tests having a --gtest_print_time flag with a "true" value
 TEST_F(InitGoogleTestTest, PrintTimeTrue) {
     const char* argv[] = {
-      "foo.exe",
+      "bar.exe",
       "--gtest_print_time=1",
       NULL
     };
 
     const char* argv2[] = {
-      "foo.exe",
+      "bar.exe",
       NULL
     };
 
@@ -5942,13 +5942,13 @@ TEST_F(InitGoogleTestTest, PrintTimeTrue) {
 // Tests having a --gtest_print_time flag with a "false" value
 TEST_F(InitGoogleTestTest, PrintTimeFalse) {
     const char* argv[] = {
-      "foo.exe",
+      "bar.exe",
       "--gtest_print_time=0",
       NULL
     };
 
     const char* argv2[] = {
-      "foo.exe",
+      "bar.exe",
       NULL
     };
 
@@ -5958,13 +5958,13 @@ TEST_F(InitGoogleTestTest, PrintTimeFalse) {
 // Tests parsing --gtest_print_time=f.
 TEST_F(InitGoogleTestTest, PrintTimeFalse_f) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_print_time=f",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5974,13 +5974,13 @@ TEST_F(InitGoogleTestTest, PrintTimeFalse_f) {
 // Tests parsing --gtest_print_time=F.
 TEST_F(InitGoogleTestTest, PrintTimeFalse_F) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_print_time=F",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -5990,13 +5990,13 @@ TEST_F(InitGoogleTestTest, PrintTimeFalse_F) {
 // Tests parsing --gtest_random_seed=number
 TEST_F(InitGoogleTestTest, RandomSeed) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_random_seed=1000",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6006,13 +6006,13 @@ TEST_F(InitGoogleTestTest, RandomSeed) {
 // Tests parsing --gtest_repeat=number
 TEST_F(InitGoogleTestTest, Repeat) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_repeat=1000",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6022,13 +6022,13 @@ TEST_F(InitGoogleTestTest, Repeat) {
 // Tests having a --gtest_also_run_disabled_tests flag
 TEST_F(InitGoogleTestTest, AlsoRunDisabledTestsFlag) {
     const char* argv[] = {
-      "foo.exe",
+      "bar.exe",
       "--gtest_also_run_disabled_tests",
       NULL
     };
 
     const char* argv2[] = {
-      "foo.exe",
+      "bar.exe",
       NULL
     };
 
@@ -6039,13 +6039,13 @@ TEST_F(InitGoogleTestTest, AlsoRunDisabledTestsFlag) {
 // Tests having a --gtest_also_run_disabled_tests flag with a "true" value
 TEST_F(InitGoogleTestTest, AlsoRunDisabledTestsTrue) {
     const char* argv[] = {
-      "foo.exe",
+      "bar.exe",
       "--gtest_also_run_disabled_tests=1",
       NULL
     };
 
     const char* argv2[] = {
-      "foo.exe",
+      "bar.exe",
       NULL
     };
 
@@ -6056,13 +6056,13 @@ TEST_F(InitGoogleTestTest, AlsoRunDisabledTestsTrue) {
 // Tests having a --gtest_also_run_disabled_tests flag with a "false" value
 TEST_F(InitGoogleTestTest, AlsoRunDisabledTestsFalse) {
     const char* argv[] = {
-      "foo.exe",
+      "bar.exe",
       "--gtest_also_run_disabled_tests=0",
       NULL
     };
 
     const char* argv2[] = {
-      "foo.exe",
+      "bar.exe",
       NULL
     };
 
@@ -6073,13 +6073,13 @@ TEST_F(InitGoogleTestTest, AlsoRunDisabledTestsFalse) {
 // Tests parsing --gtest_shuffle.
 TEST_F(InitGoogleTestTest, ShuffleWithoutValue) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_shuffle",
     NULL
 };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6089,13 +6089,13 @@ TEST_F(InitGoogleTestTest, ShuffleWithoutValue) {
 // Tests parsing --gtest_shuffle=0.
 TEST_F(InitGoogleTestTest, ShuffleFalse_0) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_shuffle=0",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6106,13 +6106,13 @@ TEST_F(InitGoogleTestTest, ShuffleFalse_0) {
 // definition.
 TEST_F(InitGoogleTestTest, ShuffleTrue) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_shuffle=1",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6122,13 +6122,13 @@ TEST_F(InitGoogleTestTest, ShuffleTrue) {
 // Tests parsing --gtest_stack_trace_depth=number.
 TEST_F(InitGoogleTestTest, StackTraceDepth) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_stack_trace_depth=5",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6137,13 +6137,13 @@ TEST_F(InitGoogleTestTest, StackTraceDepth) {
 
 TEST_F(InitGoogleTestTest, StreamResultTo) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_stream_result_to=localhost:1234",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6154,13 +6154,13 @@ TEST_F(InitGoogleTestTest, StreamResultTo) {
 // Tests parsing --gtest_throw_on_failure.
 TEST_F(InitGoogleTestTest, ThrowOnFailureWithoutValue) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_throw_on_failure",
     NULL
 };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6170,13 +6170,13 @@ TEST_F(InitGoogleTestTest, ThrowOnFailureWithoutValue) {
 // Tests parsing --gtest_throw_on_failure=0.
 TEST_F(InitGoogleTestTest, ThrowOnFailureFalse_0) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_throw_on_failure=0",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6187,13 +6187,13 @@ TEST_F(InitGoogleTestTest, ThrowOnFailureFalse_0) {
 // definition.
 TEST_F(InitGoogleTestTest, ThrowOnFailureTrue) {
   const char* argv[] = {
-    "foo.exe",
+    "bar.exe",
     "--gtest_throw_on_failure=1",
     NULL
   };
 
   const char* argv2[] = {
-    "foo.exe",
+    "bar.exe",
     NULL
   };
 
@@ -6204,7 +6204,7 @@ TEST_F(InitGoogleTestTest, ThrowOnFailureTrue) {
 // Tests parsing wide strings.
 TEST_F(InitGoogleTestTest, WideStrings) {
   const wchar_t* argv[] = {
-    L"foo.exe",
+    L"bar.exe",
     L"--gtest_filter=Foo*",
     L"--gtest_list_tests=1",
     L"--gtest_break_on_failure",
@@ -6213,7 +6213,7 @@ TEST_F(InitGoogleTestTest, WideStrings) {
   };
 
   const wchar_t* argv2[] = {
-    L"foo.exe",
+    L"bar.exe",
     L"--non_gtest_flag",
     NULL
   };
@@ -6383,36 +6383,36 @@ TEST(StreamingAssertionsTest, IntegerLessThan) {
 }
 
 TEST(StreamingAssertionsTest, StringsEqual) {
-  EXPECT_STREQ("foo", "foo") << "unexpected failure";
-  ASSERT_STREQ("foo", "foo") << "unexpected failure";
-  EXPECT_NONFATAL_FAILURE(EXPECT_STREQ("foo", "bar") << "expected failure",
+  EXPECT_STREQ("bar", "bar") << "unexpected failure";
+  ASSERT_STREQ("bar", "bar") << "unexpected failure";
+  EXPECT_NONFATAL_FAILURE(EXPECT_STREQ("bar", "bar") << "expected failure",
                           "expected failure");
-  EXPECT_FATAL_FAILURE(ASSERT_STREQ("foo", "bar") << "expected failure",
+  EXPECT_FATAL_FAILURE(ASSERT_STREQ("bar", "bar") << "expected failure",
                        "expected failure");
 }
 
 TEST(StreamingAssertionsTest, StringsNotEqual) {
-  EXPECT_STRNE("foo", "bar") << "unexpected failure";
-  ASSERT_STRNE("foo", "bar") << "unexpected failure";
-  EXPECT_NONFATAL_FAILURE(EXPECT_STRNE("foo", "foo") << "expected failure",
+  EXPECT_STRNE("bar", "bar") << "unexpected failure";
+  ASSERT_STRNE("bar", "bar") << "unexpected failure";
+  EXPECT_NONFATAL_FAILURE(EXPECT_STRNE("bar", "bar") << "expected failure",
                           "expected failure");
-  EXPECT_FATAL_FAILURE(ASSERT_STRNE("foo", "foo") << "expected failure",
+  EXPECT_FATAL_FAILURE(ASSERT_STRNE("bar", "bar") << "expected failure",
                        "expected failure");
 }
 
 TEST(StreamingAssertionsTest, StringsEqualIgnoringCase) {
-  EXPECT_STRCASEEQ("foo", "FOO") << "unexpected failure";
-  ASSERT_STRCASEEQ("foo", "FOO") << "unexpected failure";
-  EXPECT_NONFATAL_FAILURE(EXPECT_STRCASEEQ("foo", "bar") << "expected failure",
+  EXPECT_STRCASEEQ("bar", "FOO") << "unexpected failure";
+  ASSERT_STRCASEEQ("bar", "FOO") << "unexpected failure";
+  EXPECT_NONFATAL_FAILURE(EXPECT_STRCASEEQ("bar", "bar") << "expected failure",
                           "expected failure");
-  EXPECT_FATAL_FAILURE(ASSERT_STRCASEEQ("foo", "bar") << "expected failure",
+  EXPECT_FATAL_FAILURE(ASSERT_STRCASEEQ("bar", "bar") << "expected failure",
                        "expected failure");
 }
 
 TEST(StreamingAssertionsTest, StringNotEqualIgnoringCase) {
-  EXPECT_STRCASENE("foo", "bar") << "unexpected failure";
-  ASSERT_STRCASENE("foo", "bar") << "unexpected failure";
-  EXPECT_NONFATAL_FAILURE(EXPECT_STRCASENE("foo", "FOO") << "expected failure",
+  EXPECT_STRCASENE("bar", "bar") << "unexpected failure";
+  ASSERT_STRCASENE("bar", "bar") << "unexpected failure";
+  EXPECT_NONFATAL_FAILURE(EXPECT_STRCASENE("bar", "FOO") << "expected failure",
                           "expected failure");
   EXPECT_FATAL_FAILURE(ASSERT_STRCASENE("bar", "BAR") << "expected failure",
                        "expected failure");

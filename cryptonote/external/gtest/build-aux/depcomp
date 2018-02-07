@@ -259,7 +259,7 @@ aix)
     test -f "$tmpdepfile" && break
   done
   if test -f "$tmpdepfile"; then
-    # Each line is of the form `foo.o: dependent.h'.
+    # Each line is of the form `bar.o: dependent.h'.
     # Do two passes, one to just change these to
     # `$object: dependent.h' and one to simply `dependent.h:'.
     sed -e "s,^.*\.[a-z]*:,$object:," < "$tmpdepfile" > "$depfile"
@@ -276,20 +276,20 @@ aix)
 
 icc)
   # Intel's C compiler understands `-MD -MF file'.  However on
-  #    icc -MD -MF foo.d -c -o sub/foo.o sub/foo.c
-  # ICC 7.0 will fill foo.d with something like
-  #    foo.o: sub/foo.c
-  #    foo.o: sub/foo.h
+  #    icc -MD -MF bar.d -c -o sub/bar.o sub/bar.c
+  # ICC 7.0 will fill bar.d with something like
+  #    bar.o: sub/bar.c
+  #    bar.o: sub/bar.h
   # which is wrong.  We want:
-  #    sub/foo.o: sub/foo.c
-  #    sub/foo.o: sub/foo.h
-  #    sub/foo.c:
-  #    sub/foo.h:
+  #    sub/bar.o: sub/bar.c
+  #    sub/bar.o: sub/bar.h
+  #    sub/bar.c:
+  #    sub/bar.h:
   # ICC 7.1 will output
-  #    foo.o: sub/foo.c sub/foo.h
+  #    bar.o: sub/bar.c sub/bar.h
   # and will wrap long lines using \ :
-  #    foo.o: sub/foo.c ... \
-  #     sub/foo.h ... \
+  #    bar.o: sub/bar.c ... \
+  #     sub/bar.h ... \
   #     ...
 
   "$@" -MD -MF "$tmpdepfile"
@@ -300,8 +300,8 @@ icc)
     exit $stat
   fi
   rm -f "$depfile"
-  # Each line is of the form `foo.o: dependent.h',
-  # or `foo.o: dep1.h dep2.h \', or ` dep3.h dep4.h \'.
+  # Each line is of the form `bar.o: dependent.h',
+  # or `bar.o: dep1.h dep2.h \', or ` dep3.h dep4.h \'.
   # Do two passes, one to just change these to
   # `$object: dependent.h' and one to simply `dependent.h:'.
   sed "s,^[^:]*:,$object :," < "$tmpdepfile" > "$depfile"
@@ -316,7 +316,7 @@ hp2)
   # The "hp" stanza above does not work with aCC (C++) and HP's ia64
   # compilers, which have integrated preprocessors.  The correct option
   # to use with these is +Maked; it writes dependencies to a file named
-  # 'foo.d', which lands next to the object file, wherever that
+  # 'bar.d', which lands next to the object file, wherever that
   # happens to be.
   # Much of this is similar to the tru64 case; see comments there.
   dir=`echo "$object" | sed -e 's|/[^/]*$|/|'`
@@ -359,9 +359,9 @@ hp2)
 
 tru64)
    # The Tru64 compiler uses -MD to generate dependencies as a side
-   # effect.  `cc -MD -o foo.o ...' puts the dependencies into `foo.o.d'.
+   # effect.  `cc -MD -o bar.o ...' puts the dependencies into `bar.o.d'.
    # At least on Alpha/Redhat 6.1, Compaq CCC V6.2-504 seems to put
-   # dependencies in `foo.d' instead, so we check for that too.
+   # dependencies in `bar.d' instead, so we check for that too.
    # Subdirectories are respected.
    dir=`echo "$object" | sed -e 's|/[^/]*$|/|'`
    test "x$dir" = "x$object" && dir=
@@ -500,7 +500,7 @@ dashmstdout)
   test -z "$dashmflag" && dashmflag=-M
   # Require at least two characters before searching for `:'
   # in the target name.  This is to cope with DOS-style filenames:
-  # a dependency such as `c:/foo/bar' could be seen as target `c' otherwise.
+  # a dependency such as `c:/bar/bar' could be seen as target `c' otherwise.
   "$@" $dashmflag |
     sed 's:^[  ]*[^: ][^:][^:]*\:[    ]*:'"$object"'\: :' > "$tmpdepfile"
   rm -f "$depfile"

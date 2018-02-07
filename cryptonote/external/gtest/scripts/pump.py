@@ -40,8 +40,8 @@ USAGE:
        pump.py SOURCE_FILE
 
 EXAMPLES:
-       pump.py foo.cc.pump
-         Converts foo.cc.pump to foo.cc.
+       pump.py bar.cc.pump
+         Converts bar.cc.pump to bar.cc.
 
 GRAMMAR:
        CODE ::= ATOMIC_CODE*

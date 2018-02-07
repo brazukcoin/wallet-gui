@@ -21,7 +21,7 @@ While the API has not been changed since the previous major release, we
 incremented the major version number of libqrencode to 4 because the
 implementation of the library has been largely changed.
 
-This release improves the performance and memory footprints of code generation.
+This release improves the performance and memory bartprints of code generation.
 
 Now you can build libqrencode with CMake.
 

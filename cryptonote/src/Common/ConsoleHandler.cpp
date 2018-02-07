@@ -1,8 +1,7 @@
 // Copyright (c) 2011-2016 The Cryptonote developers
 // Copyright (c) 2014-2016 XDN developers
 // Copyright (c) 2006-2013 Andrey N.Sabelnikov, www.sabelnikov.net
-// Copyright (c) 2016-2017 The Brazukcoinwanec developers
-// Copyright (c) 2018, The Brazukcoin developers
+// Copyright (c) 2016-2017 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 

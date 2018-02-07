@@ -155,8 +155,8 @@ GTEST_API_ bool InDeathTestChild();
 //   simplicity, the current implementation doesn't search the PATH
 //   when launching the sub-process.  This means that the user must
 //   invoke the test program via a path that contains at least one
-//   path separator (e.g. path/to/foo_test and
-//   /absolute/path/to/bar_test are fine, but foo_test is not).  This
+//   path separator (e.g. path/to/bar_test and
+//   /absolute/path/to/bar_test are fine, but bar_test is not).  This
 //   is rarely a problem as people usually don't put the test binary
 //   directory in PATH.
 //
