@@ -1,23 +1,36 @@
-**1. Clone wallet sources**
 
-```
-git clone https://github.com/seredat/brazukcoinwallet.git
-```
+# Brazukcoin GUI Wallet
 
-**2. Set symbolic link to coin sources at the same level as `src`. For example:**
 
-```
-ln -s ../brazukcoin cryptonote
-```
+**Instructions for Linux:**
 
-Alternative way is to create git submodule:
+##### download the main wallet
+` ~$ git clone https://github.com/brazukcoin/brazukcoin.git `
 
-```
-git submodule add https://github.com/seredat/brazukcoin.git cryptonote
-```
+##### download the GUI wallet
+` ~$ git clone https://github.com/brazukcoin/brazukcoinwallet.git `
 
-**3. Build**
+##### change to GUI wallet's directory
+` ~$ cd brazukcoinwallet/ `
 
-```
-mkdir build && cd build && cmake .. && make
-```
+##### create a shortcut to main wallet and, name that shortcut 'cryptonote'
+` ~/brazukcoinwallet$ ln -s ../brazukcoin cryptonote `
+
+##### create a 'build' subdirectory
+` ~/brazukcoinwallet$ mkdir -p build `
+
+##### change to 'build' directory
+` ~/brazukcoinwallet$ cd build/ `
+
+##### configure environment for compilation
+` ~/brazukcoinwallet/build/$ cmake .. `
+
+##### build the GUI wallet
+` ~/brazukcoinwallet/build/$ make `
+
+##### run the GUI wallet
+` ~/brazukcoinwallet/build/$ ./Brazukcoin `
+
+
+
+Enjoy!

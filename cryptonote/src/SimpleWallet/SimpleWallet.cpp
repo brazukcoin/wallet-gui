@@ -1,7 +1,7 @@
-// Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers, The Karbovanets developers
+// Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers, The Brazukcoinvanets developers
 // Copyright (c) 2014-2016, XDN developers
 // Copyright (c) 2014-2017, The Forknote developers
-// Copyright (c) 2016-2018, Karbo developers
+// Copyright (c) 2016-2018, Brazukcoin developers
 //
 // All rights reserved.
 // 

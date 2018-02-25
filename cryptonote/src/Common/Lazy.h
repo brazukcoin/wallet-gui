@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018, Karbo developers
+// Copyright (c) 2017-2018, Brazukcoin developers
 // 
 // All rights reserved.
 // 

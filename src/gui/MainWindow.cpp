@@ -116,7 +116,7 @@ void MainWindow::connectToSignals() {
 }
 
 void MainWindow::initUi() {
-  setWindowTitle(QString(tr("Karbo Wallet %1")).arg(Settings::instance().getVersion()));
+  setWindowTitle(QString(tr("Brazukcoin Wallet %1")).arg(Settings::instance().getVersion()));
 #ifdef Q_OS_WIN32
   createTrayIcon();
 #endif
@@ -890,7 +890,7 @@ void MainWindow::createTrayIcon()
 {
 #ifdef Q_OS_WIN
     m_trayIcon = new QSystemTrayIcon(QPixmap(":images/cryptonote"), this);
-    QString toolTip = QString(tr("Karbo Wallet %1")).arg(Settings::instance().getVersion());
+    QString toolTip = QString(tr("Brazukcoin Wallet %1")).arg(Settings::instance().getVersion());
     m_trayIcon->setToolTip(toolTip);
     m_trayIcon->show();
 #endif
