@@ -1,5 +1,5 @@
 
 set(CN_PROJECT_NAME "Brazukcoin")
-set(CN_CURRENCY_DISPLAY_NAME "Brazukcoin")
+set(CN_CURRENCY_DISPLAY_NAME "BrazukCoin")
 set(CN_CURRENCY_TICKER "BZK")
-set(CN_VERSION 1.2.1)
+set(CN_VERSION 1.4.6)

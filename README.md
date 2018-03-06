@@ -1,38 +1,29 @@
-
 # Brazukcoin GUI Wallet
-
 
 **Instructions for Linux:**
 
-##### install dependencies
-` ~**$** sudo apt-get update && sudo apt-get install git cmake build-essential libboost-all-dev `
+Install dependencies
+**~$** `sudo apt-get install git cmake build-essential libboost-all-dev`
 
-##### download the main wallet
-` ~**$** git clone https://github.com/brazukcoin/brazukcoin.git `
+Download Brazukcoin GUI Wallet's source code
+**~$** `git clone https://github.com/brazukcoin/brazukcoinwallet.git`
 
-##### download the GUI wallet
-` ~**$** git clone https://github.com/brazukcoin/brazukcoinwallet.git `
+Change to GUI wallet's directory
+**~$** `cd brazukcoinwallet`
 
-##### change to GUI wallet's directory
-` ~**$** cd brazukcoinwallet/ `
+Create a 'build' subdirectory
+**~/brazukcoinwallet$** `mkdir -p build`
 
-##### create a shortcut to main wallet and, name that shortcut 'cryptonote'
-` ~/brazukcoinwallet**$** ln -s ../brazukcoin cryptonote `
+Change to 'build' directory
+**~/brazukcoinwallet$** `cd build`
 
-##### create a 'build' subdirectory
-` ~/brazukcoinwallet**$** mkdir -p build `
+Configure environment for compilation
+**~/brazukcoinwallet/build/$** `cmake ..`
 
-##### change to 'build' directory
-` ~/brazukcoinwallet**$** cd build/ `
+Build the GUI wallet
+**~/brazukcoinwallet/build/$** `make`
 
-##### configure environment for compilation
-` ~/brazukcoinwallet/build/**$** cmake .. `
-
-##### build the GUI wallet
-` ~/brazukcoinwallet/build/**$** make `
-
-##### run the GUI wallet
-` ~/brazukcoinwallet/build/**$** ./Brazukcoin `
-
+Run the GUI wallet
+**~/brazukcoinwallet/build/$** `./Brazukcoin`
 
 Enjoy!

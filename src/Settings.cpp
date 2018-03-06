@@ -89,7 +89,7 @@ void Settings::load() {
   }
 
   QStringList defaultPoolList;
-  defaultPoolList << "pool.brazukcoin.com:3333" << "pool2.democats.org:45570" << "bzk.sberex.com:3333" << "mine.bzk.mypool.online:32350" << "bzk-eu1.miningpool.org.ua:3333";
+  defaultPoolList << "pool.brazukcoin.org:3333" << "us.eat-sleep-mine.com:1133" << "bzk.dreampool.info:3710";
   if (!m_settings.contains(OPTION_MINING_POOLS)) {
     setMiningPoolList(QStringList() << defaultPoolList);
   } else {
@@ -103,7 +103,7 @@ void Settings::load() {
   }
 
   QStringList defaultNodesList;
-  defaultNodesList << "node.brazukcoin.com:32348" << "node.bzk.mypool.online:32348"; // "pool2.democats.org:7671"
+  defaultNodesList << "" << ""; // "IP or FQDN : PORT"
   if (!m_settings.contains(OPTION_RPCNODES)) {
     setRpcNodesList(QStringList() << defaultNodesList);
   } else {
