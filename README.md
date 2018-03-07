@@ -26,4 +26,5 @@ Build the GUI wallet
 Run the GUI wallet
 **~/brazukcoinwallet/build/$** `./Brazukcoin`
 
+
 Enjoy!
