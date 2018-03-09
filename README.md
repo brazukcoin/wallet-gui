@@ -4,7 +4,7 @@
 
 Install dependencies:
 
-**~$** `sudo apt-get install git cmake build-essential libboost-all-dev qt5base5-dev`
+**~$** `sudo apt-get install git cmake build-essential libboost-all-dev qtbase5-dev`
 
 
 Download Brazukcoin GUI Wallet's source code:
