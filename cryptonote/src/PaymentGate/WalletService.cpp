@@ -189,9 +189,7 @@ std::vector<CryptoNote::TransactionsInBlockInfo> filterTransactions(
       }
     }
 
-    if (!block.transactions.empty()) {
-      result.push_back(std::move(item));
-    }
+    result.push_back(std::move(item));
   }
 
   return result;
@@ -466,7 +464,7 @@ std::error_code WalletService::createAddress(const std::string& spendSecretKeyTe
       return make_error_code(CryptoNote::error::WalletServiceErrorCode::WRONG_KEY_FORMAT);
     }
 
-	address = wallet.createAddress(secretKey, reset);
+    address = wallet.createAddress(secretKey, reset);
   } catch (std::system_error& x) {
     logger(Logging::WARNING, Logging::BRIGHT_YELLOW) << "Error while creating address: " << x.what();
     return x.code();
