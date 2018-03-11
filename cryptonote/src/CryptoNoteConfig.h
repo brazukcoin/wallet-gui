@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers, The Brazukcoinwanec developers
+// Copyright (c) 2012-2016, The CryptoNote developers, The Bytecoin developers, The Karbowanec developers
 // Copyright (c) 2018, The Brazukcoin developers
 //
 // This file is part of Bytecoin.
@@ -145,7 +145,9 @@ const std::initializer_list<CheckpointData> CHECKPOINTS = {
     { 13888, "17ed08363437e18891e8bcf3a95bf68a28e8c91cecbd9a381c627c8ae5f34d81" },
     { 15872, "5802fb368b199b323a79d2f72b1b639a3f4a62d896b61665a9aafc0194b52687" },
     { 17856, "ccd3e3fa12bb56694a04fc5aed2a8546ec95a4073ef019f639be9a567ab6b73e" },
-    { 19840, "9f1dd8c2bb42525c66ee991405b35263e31793ce7b689f0840430e5f3c20d7f3" }
+    { 19840, "9f1dd8c2bb42525c66ee991405b35263e31793ce7b689f0840430e5f3c20d7f3" },
+    { 21824, "a6652f8d75c8b1b2a6aa620ce35e2a08802b328af1e978d995df538a6bb2ee63" }    
+
 };
 
 }  // namespace CryptoNote
@@ -153,5 +155,4 @@ const std::initializer_list<CheckpointData> CHECKPOINTS = {
 #define ALLOW_DEBUG_COMMANDS
 
 #endif  // SRC_CRYPTONOTECONFIG_H_
-
 
