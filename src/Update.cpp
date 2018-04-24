@@ -1,4 +1,5 @@
-// Copyright (c) 2016 The Brazukcoin developers
+// Copyright (c) 2016 The Karbowanec developers
+// Copyright (c) 2018 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include "Update.h"
@@ -59,7 +60,7 @@ std::istream& operator>>(std::istream& str, Version::VersionDigit& digit)
     return str;
 }
 
-void Updater::checkForUpdate()
+/*void Updater::checkForUpdate()
 {
     manager = new QNetworkAccessManager(this);
     if(manager->networkAccessible() == QNetworkAccessManager::Accessible)
@@ -68,7 +69,7 @@ void Updater::checkForUpdate()
                 this, SLOT(replyFinished(QNetworkReply*)));
         manager->get(QNetworkRequest(QUrl(BZKCOIN_UPDATE_URL)));
     }
-}
+}*/
 
 void Updater::replyFinished (QNetworkReply *reply)
 {
@@ -88,7 +89,7 @@ void Updater::replyFinished (QNetworkReply *reply)
          if (ourVersion < remoteVersion) {
 
              if (QMessageBox::warning(nullptr, QObject::tr("New version available"), QObject::tr("There is update available.\nDo you want to go to download page?"), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok) {
-                 QString link = "http://brazukcoin.com/#downloads";
+                 QString link = "https://www.brazukcoin.org/downloads";
                  QDesktopServices::openUrl(QUrl(link));
              }
 

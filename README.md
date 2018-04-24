@@ -1,46 +1,33 @@
-# Brazukcoin GUI Wallet
-
-**Instructions for Linux:**
-
-Install dependencies:
-
-**~$** `sudo apt-get install git cmake build-essential libboost-all-dev qtbase5-dev`
 
 
-Download Brazukcoin GUI Wallet's source code:
+### How To Compile
 
-**~$** `git clone https://github.com/brazukcoin/brazukcoinwallet.git`
+##### Prerequisites
 
+- You will need the following packages: boost (1.55 or higher), QT Library (5.9.0 orhigher) cmake, git, gcc (4.9 or higher), g++ (4.9 or higher), make, and python. Most of these should already be installed on your system.
+- For example on ubuntu: `sudo apt-get install build-essential python-dev gcc g++ git cmake libboost-all-dev `
+- After this you can compile your Brazukcoin
 
-Change to GUI wallet's directory:
+**1. Clone wallet sources**
 
-**~$** `cd brazukcoinwallet`
+```
+git clone https://github.com/www.brazukcoin.org/brazukcoinwallet
+```
 
+**2. Set symbolic link to coin sources at the same level as `src`. For example:**
 
-Create a 'build' subdirectory:
+```
+ln -s ../brazukcoin cryptonote
+```
 
-**~/brazukcoinwallet$** `mkdir -p build`
+Alternative way is to create git submodule:
 
+```
+git submodule add https://github.com/brazukcoin/brazukcoin.git cryptonote
+```
 
-Change to 'build' directory:
+**3. Build**
 
-**~/brazukcoinwallet$** `cd build`
-
-
-Configure environment for compilation:
-
-**~/brazukcoinwallet/build/$** `cmake ..`
-
-
-Build the GUI wallet:
-
-**~/brazukcoinwallet/build/$** `make`
-
-
-Run the GUI wallet:
-
-**~/brazukcoinwallet/build/$** `./Brazukcoin`
-
-
-
-**Enjoy!**
+```
+mkdir build && cd build && cmake .. && make
+```

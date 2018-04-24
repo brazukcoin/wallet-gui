@@ -5,18 +5,26 @@ include(QREncode.cmake)
 
 project(${CN_PROJECT_NAME})
 
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
+
+if(POLICY CMP0043)
+  cmake_policy(SET CMP0043 NEW)
+endif()
+
 execute_process(COMMAND git log -1 --pretty=format:%h
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  OUTPUT_VARIABLE GIT_REVISION)
+WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+OUTPUT_VARIABLE GIT_REVISION)
 
 set(CRYPTONOTE_LIB cryptonote)
 
 include_directories(${CMAKE_BINARY_DIR}
-  src
-  cryptonote/external
-  cryptonote/include
-  cryptonote/src
-  libqrencode)
+    src
+    cryptonote/external
+    cryptonote/include
+    cryptonote/src
+    libqrencode)
 
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -186,9 +194,8 @@ qt5_add_resources(RCC ${QRC})
 
 if (WIN32)
   if (NOT MSVC)
-	  message(FATAL_ERROR "Only MSVC is supported on this platform")
+	message(FATAL_ERROR "Only MSVC is supported on this platform")
   endif ()
-
   add_definitions(/D_CRT_SECURE_NO_WARNINGS /D_WIN32_WINNT=0x0600 /DSTATICLIB)
   include_directories(cryptonote/src/platform/msc)
 
@@ -206,7 +213,7 @@ elseif (UNIX)
     set(PLATFORM_DIR OSX)
     set(MACOSX_BUNDLE_INFO_STRING "Brazukcoin GUI wallet")
     set(MACOSX_BUNDLE_LONG_VERSION_STRING "${VERSION_VERSION}.${VERSION_MINOR}.${VERSION_PATCH}")
-    set(MACOSX_BUNDLE_BUNDLE_NAME "Карбованець")
+    set(MACOSX_BUNDLE_BUNDLE_NAME "Brazukcoin")
     set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${VERSION_VERSION}.${VERSION_MINOR}.${VERSION_PATCH}")
     set(MACOSX_BUNDLE_BUNDLE_VERSION "$${VERSION_VERSION}.${VERSION_MINOR}.${VERSION_PATCH}")
 
@@ -270,44 +277,44 @@ set(CPACK_PACKAGE_VENDOR "Brazukcoin-project")
 set(CPACK_PACKAGE_CONTACT "https://www.brazukcoin.org")
 set(CPACK_STRIP_FILES ON)
 if (APPLE)
-  set(CPACK_GENERATOR DragNDrop)
-  install(TARGETS ${PROJECT_NAME} BUNDLE DESTINATION .)
-  set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${VERSION_RELEASE}")
+    set(CPACK_GENERATOR DragNDrop)
+    install(TARGETS ${PROJECT_NAME} BUNDLE DESTINATION .)
+    set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${VERSION_RELEASE}")
 elseif (UNIX)
-  find_program(RPMBUILD rpmbuild)
+    find_program(RPMBUILD rpmbuild)
 
-  install(PROGRAMS build/${PROJECT_NAME} DESTINATION bin
+    install(PROGRAMS build/${PROJECT_NAME} DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-  install(FILES src/brazukcoinwallet.desktop DESTINATION share/applications)
-  install(FILES src/images/logo-brazukcoin.png DESTINATION share/pixmaps RENAME brazukcoin.png)
-  install(FILES copyright DESTINATION share/doc/brazukcoinwallet)
+    install(FILES src/brazukcoinwallet.desktop DESTINATION share/applications)
+    install(FILES src/images/brazukcoin.png DESTINATION share/pixmaps RENAME brazukcoin.png)
+    install(FILES copyright DESTINATION share/doc/brazukcoinwallet)
 
-  if (NOT RPMBUILD)
-    set(CPACK_GENERATOR DEB)
-    set(CPACK_DEBIAN_PACKAGE_NAME ${CPACK_PACKAGE_NAME})
-    set(CPACK_SYSTEM_NAME 64-bit)
-    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <krbcoin@ukr.net>")
-    set(CPACK_DEBIAN_PACKAGE_SECTION Office)
-    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-    set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Brazukcoin BZK Wallet
-      In a world of mounting threats to personal liberty, Brazukcoin adds a new front of resistance through real financial freedom.
-      Brazukcoin is based on time-tested blockchain technology while also adding extreme privacy features in its CryptoNote algorithm.
-      The code is (and will always remain) free and open-source!")
-    set(CPACK_PACKAGE_FILE_NAME "${CPACK_DEBIAN_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${VERSION_RELEASE}${CPACK_SYSTEM_NAME}")
-  else()
-    set(CPACK_GENERATOR RPM)
-    set(CPACK_SYSTEM_NAME x86_64)
-    set(CPACK_RPM_PACKAGE_RELEASE ${VERSION_RELEASE})
-    set(CPACK_RPM_PACKAGE_LICENSE "MIT")
-    set(CPACK_RPM_PACKAGE_GROUP Office)
-    set(CPACK_RPM_PACKAGE_REQUIRES "qt5-qtbase >= 5.3.2, qt5-qtbase-gui >= 5.3.2")
-    set(CPACK_RPM_PACKAGE_SUMMARY "Brazukcoin BZK wallet")
-    set(CPACK_RPM_PACKAGE_DESCRIPTION "Brazukcoin BZK Wallet
-      In a world of mounting threats to personal liberty, Brazukcoin adds a new front of resistance through real financial freedom.
-      Brazukcoin is based on time-tested blockchain technology while also adding extreme privacy features in its CryptoNote algorithm.
-      The code is (and will always remain) free and open-source!")
-    set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${VERSION_RELEASE}${CPACK_SYSTEM_NAME}")
-  endif ()
+    if (NOT RPMBUILD)
+        set(CPACK_GENERATOR DEB)
+        set(CPACK_DEBIAN_PACKAGE_NAME ${CPACK_PACKAGE_NAME})
+        set(CPACK_SYSTEM_NAME 64-bit)
+        set(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <info@brazukcoin.org>")
+        set(CPACK_DEBIAN_PACKAGE_SECTION Office)
+        set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+        set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Brazukcoin BZK wallet
+ Brazukcoin is a decentralized, privacy oriented peer-to-peer
+ cryptocurrency. It is open-source, nobody owns or controls Brazukcoin
+ and everyone can take part.")
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_DEBIAN_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${VERSION_RELEASE}${CPACK_SYSTEM_NAME}")
+    else()
+        set(CPACK_GENERATOR RPM)
+        set(CPACK_SYSTEM_NAME x86_64)
+        set(CPACK_RPM_PACKAGE_RELEASE ${VERSION_RELEASE})
+        set(CPACK_RPM_PACKAGE_LICENSE "MIT")
+        set(CPACK_RPM_PACKAGE_GROUP Office)
+        set(CPACK_RPM_PACKAGE_REQUIRES "qt5-qtbase >= 5.3.2, qt5-qtbase-gui >= 5.3.2")
+        set(CPACK_RPM_PACKAGE_SUMMARY "Brazukcoin BZK wallet")
+        set(CPACK_RPM_PACKAGE_DESCRIPTION "Brazukcoin BZK wallet
+ Brazukcoin is a decentralized, privacy oriented peer-to-peer
+ cryptocurrency. It is open-source, nobody owns or controls Brazukcoin
+ and everyone can take part.")
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${VERSION_RELEASE}${CPACK_SYSTEM_NAME}")
+    endif ()
 elseif (WIN32)
   install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION .)
   set(CPACK_GENERATOR ZIP)

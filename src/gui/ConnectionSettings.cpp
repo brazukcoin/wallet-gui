@@ -1,4 +1,5 @@
-// Copyright (c) 2016 The Brazukcoin developers
+// Copyright (c) 2016 The Karbowanec developers
+// Copyright (c) 2018 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,7 +14,7 @@
 #include <QDebug>
 
 namespace Ui {
-class ConnectionSettingsDialog;
+    class ConnectionSettingsDialog;
 }
 
 namespace WalletGui {
@@ -22,8 +23,10 @@ ConnectionSettingsDialog::ConnectionSettingsDialog(QWidget* _parent) : QDialog(_
     m_nodeModel(new NodeModel(this)),
     m_ui(new Ui::ConnectionSettingsDialog) {
     m_ui->setupUi(this);
+    m_ui->label->setStyleSheet("{color: #C0BBFE}");
+    m_ui->label_2->setStyleSheet("{color: #C0BBFE}");
     m_ui->remoteNodesComboBox->setModel(m_nodeModel);
-//  m_ui->remoteNodesComboBox->setValidator(new QRegExpValidator( QRegExp("[^\\:]+:[0-9]"), this ));
+    //m_ui->remoteNodesComboBox->setValidator(new QRegExpValidator( QRegExp("[^\\:]+:[0-9]"), this ));
 }
 
 ConnectionSettingsDialog::~ConnectionSettingsDialog() {

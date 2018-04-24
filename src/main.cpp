@@ -1,5 +1,6 @@
 // Copyright (c) 2011-2015 The Cryptonote developers
-// Copyright (c) 2016-2017 The Brazukcoin developers
+// Copyright (c) 2016-2017 The Karbowanec developers
+// Copyright (c) 2017-2018 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <QApplication>
@@ -136,7 +137,7 @@ int main(int argc, char* argv[]) {
   }
   splash->finish(&MainWindow::instance());
   Updater d;
-    d.checkForUpdate();
+  //d.checkForUpdate();
   MainWindow::instance().show();
   WalletAdapter::instance().open("");
 

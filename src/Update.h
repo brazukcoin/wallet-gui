@@ -1,4 +1,5 @@
-// Copyright (c) 2016 The Brazukcoin developers
+// Copyright (c) 2016 The Karbowanec developers
+// Copyright (c) 2018 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef UPDATE_H
@@ -10,7 +11,7 @@
 #include <QNetworkReply>
 #include <QUrl>
 
-const static QString BZKCOIN_UPDATE_URL = "http://brazukcoin.com/download/update.txt";
+const static QString BZKCOIN_UPDATE_URL = "http://update.brazukcoincoin.org/files/update.txt";
 
 class Updater : public QObject
 {
@@ -18,7 +19,7 @@ class Updater : public QObject
 public:
     explicit Updater(QObject *parent = 0);
 
-    void checkForUpdate();
+    //void checkForUpdate();
 
 signals:
     

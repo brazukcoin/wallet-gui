@@ -1,5 +1,6 @@
 // Copyright (c) 2011-2015 The Cryptonote developers
-// Copyright (c) 2016-2017 The Brazukcoin developers
+// Copyright (c) 2016-2017 The Karbowanec developers
+// Copyright (c) 2017-2018 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -195,11 +196,11 @@ public:
     return m_node.getLastLocalBlockTimestamp();
   }
 
-  uint64_t getPeerCount() {
+  uint64_t getPeerCount() override{
     return m_node.getPeerCount();
   }
 
-  uint64_t getDifficulty() {
+  uint64_t getDifficulty() override{
     try {
         CryptoNote::COMMAND_RPC_GET_INFO::request req;
         CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -221,7 +222,7 @@ public:
       }
   }
 
-  uint64_t getTxCount() {
+  uint64_t getTxCount() override{
       try {
           CryptoNote::COMMAND_RPC_GET_INFO::request req;
           CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -243,7 +244,7 @@ public:
         }
   }
 
-  uint64_t getTxPoolSize() {
+  uint64_t getTxPoolSize() override{
       try {
           CryptoNote::COMMAND_RPC_GET_INFO::request req;
           CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -265,7 +266,7 @@ public:
         }
   }
 
-  uint64_t getAltBlocksCount() {
+  uint64_t getAltBlocksCount() override{
       try {
           CryptoNote::COMMAND_RPC_GET_INFO::request req;
           CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -287,7 +288,7 @@ public:
         }
   }
 
-  uint64_t getConnectionsCount() {
+  uint64_t getConnectionsCount() override{
       try {
           CryptoNote::COMMAND_RPC_GET_INFO::request req;
           CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -309,7 +310,7 @@ public:
         }
   }
 
-  uint64_t getOutgoingConnectionsCount() {
+  uint64_t getOutgoingConnectionsCount() override{
       try {
           CryptoNote::COMMAND_RPC_GET_INFO::request req;
           CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -331,7 +332,7 @@ public:
         }
   }
 
-  uint64_t getIncomingConnectionsCount() {
+  uint64_t getIncomingConnectionsCount() override{
       try {
           CryptoNote::COMMAND_RPC_GET_INFO::request req;
           CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -353,7 +354,7 @@ public:
         }
   }
 
-  uint64_t getWhitePeerlistSize() {
+  uint64_t getWhitePeerlistSize() override{
       try {
           CryptoNote::COMMAND_RPC_GET_INFO::request req;
           CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -375,7 +376,7 @@ public:
         }
   }
 
-  uint64_t getGreyPeerlistSize() {
+  uint64_t getGreyPeerlistSize() override{
       try {
           CryptoNote::COMMAND_RPC_GET_INFO::request req;
           CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -398,7 +399,7 @@ public:
   }
 
   CryptoNote::IWalletLegacy* createWallet() override {
-    return new CryptoNote::WalletLegacy(m_currency, m_node, m_logManager);
+    return new CryptoNote::WalletLegacy(m_currency, m_node/*, m_logManager*/);
   }
 
 private:
@@ -407,7 +408,7 @@ private:
   CryptoNote::NodeRpcProxy m_node;
   System::Dispatcher m_dispatcher;
 
-  void peerCountUpdated(size_t count) {
+  void peerCountUpdated(size_t count) override{
     m_callback.peerCountUpdated(*this, count);
   }
 
@@ -510,48 +511,48 @@ public:
     return m_node.getLastLocalBlockTimestamp();
   }
 
-  uint64_t getPeerCount() {
+  uint64_t getPeerCount() override {
     return m_nodeServer.get_connections_count();
   }
 
-  uint64_t getDifficulty() {
+  uint64_t getDifficulty() override {
     return m_core.getNextBlockDifficulty();
   }
 
-  uint64_t getTxCount() {
+  uint64_t getTxCount() override {
     return m_core.get_blockchain_total_transactions() - m_core.get_current_blockchain_height();
   }
 
-  uint64_t getTxPoolSize() {
+  uint64_t getTxPoolSize() override {
     return m_core.get_pool_transactions_count();
   }
 
-  uint64_t getAltBlocksCount() {
+  uint64_t getAltBlocksCount() override {
     return m_core.get_alternative_blocks_count();
   }
 
-  uint64_t getConnectionsCount() {
+  uint64_t getConnectionsCount() override {
     return m_nodeServer.get_connections_count();
   }
 
-  uint64_t getOutgoingConnectionsCount() {
+  uint64_t getOutgoingConnectionsCount() override {
     return m_nodeServer.get_outgoing_connections_count();
   }
 
-  uint64_t getIncomingConnectionsCount() {
+  uint64_t getIncomingConnectionsCount() override {
     return m_nodeServer.get_connections_count() - m_nodeServer.get_outgoing_connections_count();
   }
 
-  uint64_t getWhitePeerlistSize() {
+  uint64_t getWhitePeerlistSize() override {
     return m_nodeServer.getPeerlistManager().get_white_peers_count();
   }
 
-  uint64_t getGreyPeerlistSize() {
+  uint64_t getGreyPeerlistSize() override {
     return m_nodeServer.getPeerlistManager().get_gray_peers_count();
   }
 
   CryptoNote::IWalletLegacy* createWallet() override {
-    return new CryptoNote::WalletLegacy(m_currency, m_node, m_logManager);
+    return new CryptoNote::WalletLegacy(m_currency, m_node/*, m_logManager*/);
   }
 
 private:
@@ -566,7 +567,7 @@ private:
   CryptoNote::InProcessNode m_node;
   std::future<bool> m_nodeServerFuture;
 
-  void peerCountUpdated(size_t count) {
+  void peerCountUpdated(size_t count) override {
     //m_callback.peerCountUpdated(*this, count);
     m_callback.peerCountUpdated(*this, m_nodeServer.get_connections_count() - 1);
   }
