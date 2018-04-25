@@ -29,7 +29,7 @@ $ git submodule foreach git pull origin master
 ```
 $ mkdir -p build
 $ cd build
-$ cmake
+$ cmake ..
 $ make
 ```
 **Enjoy!**
