@@ -13,7 +13,7 @@
 **1. Download GUI wallet source code**
 
 ```
-git clone https://github.com/www.brazukcoin.org/brazukcoinwallet
+git clone https://github.com/brazukcoin/brazukcoinwallet.git
 ```
 
 **2. Update from main wallet**
