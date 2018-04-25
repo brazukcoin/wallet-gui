@@ -1,0 +1,5 @@
+V.1.5.0
+
+- New Zawy's LWMA difficulty algorithm.
+- New GUI wallet theme.
+- Several more fixes.

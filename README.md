@@ -1,6 +1,7 @@
 
 
-### How To Compile
+### How To Compile for Linux (Windows and Mac instructions soon)
+
 
 ##### Prerequisites
 
@@ -8,26 +9,28 @@
 - For example on ubuntu: `sudo apt-get install build-essential python-dev gcc g++ git cmake libboost-all-dev `
 - After this you can compile your Brazukcoin
 
-**1. Clone wallet sources**
+
+**1. Download GUI wallet source code**
 
 ```
 git clone https://github.com/www.brazukcoin.org/brazukcoinwallet
 ```
 
-**2. Set symbolic link to coin sources at the same level as `src`. For example:**
+**2. Update from main wallet**
 
 ```
-ln -s ../brazukcoin cryptonote
-```
-
-Alternative way is to create git submodule:
-
-```
-git submodule add https://github.com/brazukcoin/brazukcoin.git cryptonote
+$ cd brazukcoinwallet
+$ git submodule update --init
+$ git submodule foreach git pull origin master
 ```
 
 **3. Build**
 
 ```
-mkdir build && cd build && cmake .. && make
+$ mkdir -p build
+$ cd build
+$ cmake
+$ make
 ```
+**Enjoy!**
+
