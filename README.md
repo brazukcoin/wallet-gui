@@ -33,6 +33,7 @@ $ mkdir -p build
 $ cd build
 $ cmake ..
 $ make
+$ ./Brazukcoin
 ```
 **Enjoy!**
 
