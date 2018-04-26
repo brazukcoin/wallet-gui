@@ -1,4 +1,6 @@
 
+![Image of Brazukcoin New GUI Wallet](https://i.imgur.com/fFoTr8y.png)
+
 
 ### How To Compile for Linux (Windows and Mac instructions soon)
 
