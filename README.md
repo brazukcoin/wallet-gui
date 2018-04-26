@@ -33,7 +33,15 @@ $ mkdir -p build
 $ cd build
 $ cmake ..
 $ make
+```
+
+**3. Run your new wallet**
+
+```
 $ ./Brazukcoin
 ```
+
+
+
 **Enjoy!**
 
