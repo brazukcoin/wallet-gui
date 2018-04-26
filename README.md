@@ -35,7 +35,7 @@ $ cmake ..
 $ make
 ```
 
-**3. Run your new wallet**
+**4. Run your new wallet**
 
 ```
 $ ./Brazukcoin
