@@ -19,8 +19,7 @@ MnemonicSeedDialog::MnemonicSeedDialog(QWidget* _parent) : QDialog(_parent), m_u
   m_ui->m_languageCombo->setCurrentIndex(m_ui->m_languageCombo->findData(getLanguageName(), Qt::DisplayRole));
 }
 
-MnemonicSeedDialog::~MnemonicSeedDialog() {
-}
+MnemonicSeedDialog::~MnemonicSeedDialog() {}
 
 void MnemonicSeedDialog::walletOpened() {
   CryptoNote::AccountKeys keys;
@@ -36,8 +35,7 @@ void MnemonicSeedDialog::walletClosed() {
 void MnemonicSeedDialog::initLanguages() {
   std::vector<std::string> languages;
   Crypto::ElectrumWords::get_language_list(languages);
-  for (size_t i = 0; i < languages.size(); ++i)
-  {
+  for (size_t i = 0; i < languages.size(); ++i) {
     m_ui->m_languageCombo->addItem(QString::fromStdString(languages[i]));
   }
 }

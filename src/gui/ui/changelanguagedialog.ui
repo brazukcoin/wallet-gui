@@ -32,37 +32,12 @@
        </item>
        <item>
         <property name="text">
-         <string>Українська</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Русский</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Polski</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Беларуская</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Deutsch</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Español</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
          <string>Français</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Português</string>
         </property>
        </item>
       </widget>
