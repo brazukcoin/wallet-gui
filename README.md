@@ -27,6 +27,7 @@ git clone https://github.com/brazukcoin/wallet-gui.git
 
 ```
 $ cd wallet-gui
+$ git submodule add --force https://github.com/brazukcoin/wallet.git cryptonote
 $ git submodule update --init
 $ git submodule foreach git pull origin master
 ```
