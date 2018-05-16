@@ -16,8 +16,8 @@ class ChangeLanguageDialog;
 namespace WalletGui {
 
 class ChangeLanguageDialog : public QDialog {
-  Q_OBJECT
-  Q_DISABLE_COPY(ChangeLanguageDialog)
+    Q_OBJECT
+    Q_DISABLE_COPY(ChangeLanguageDialog)
 
  public:
   ChangeLanguageDialog(QWidget* _parent);
