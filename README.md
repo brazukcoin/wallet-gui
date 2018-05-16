@@ -26,7 +26,7 @@ git clone https://github.com/brazukcoin/wallet-gui.git
 **2. Update from main wallet**
 
 ```
-$ cd brazukcoinwallet
+$ cd wallet-gui
 $ git submodule update --init
 $ git submodule foreach git pull origin master
 ```

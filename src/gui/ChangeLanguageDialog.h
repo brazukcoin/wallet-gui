@@ -8,8 +8,10 @@
 #include <QDialog>
 
 namespace Ui {
+
 class ChangeLanguageDialog;
-}
+
+}  // namespace Ui
 
 namespace WalletGui {
 
@@ -17,15 +19,15 @@ class ChangeLanguageDialog : public QDialog {
   Q_OBJECT
   Q_DISABLE_COPY(ChangeLanguageDialog)
 
-public:
+ public:
   ChangeLanguageDialog(QWidget* _parent);
   ~ChangeLanguageDialog();
 
   QString getLang() const;
   void initLangList();
 
-private:
+ private:
   QScopedPointer<Ui::ChangeLanguageDialog> m_ui;
 };
 
-}
+}  // namespace WalletGui
