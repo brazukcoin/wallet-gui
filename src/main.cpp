@@ -64,6 +64,9 @@ int main(int argc, char* argv[]) {
     else if(lng == "es-ES") {
       QLocale::setDefault(QLocale("es-ES"));
     }
+    else if(lng == "fr") {
+      QLocale::setDefault(QLocale("fr"));
+    }
     else if(lng == "id") {
       QLocale::setDefault(QLocale("id"));
     }
