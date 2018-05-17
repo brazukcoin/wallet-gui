@@ -10,31 +10,31 @@ TranslatorManager::TranslatorManager()
     QStringList resources;
     resources
         << "languages/cz"
-        << "languages/de";
-        << "languages/en-PT";
-        << "languages/es-ES";
-        << "languages/fr";
-        << "languages/id";
-        << "languages/it";
-        << "languages/kab";
-        << "languages/pt-BR";
-        << "languages/ru";
-        << "languages/vi";
+        << "languages/de"
+        << "languages/en-PT"
+        << "languages/es-ES"
+        << "languages/fr"
+        << "languages/id"
+        << "languages/it"
+        << "languages/kab"
+        << "languages/pt-BR"
+        << "languages/ru"
+        << "languages/vi"
         << "languages/zh-CN";
 
     QStringList languages;
     languages
         << "cz"
-        << "de";
-        << "en-PT";
-        << "es-ES";
-        << "fr";
-        << "id";
-        << "it";
-        << "kab";
-        << "pt-BR";
-        << "ru";
-        << "vi";
+        << "de"
+        << "en-PT"
+        << "es-ES"
+        << "fr"
+        << "id"
+        << "it"
+        << "kab"
+        << "pt-BR"
+        << "ru"
+        << "vi"
         << "zh-CN";
 
     for (int j = 0; j < resources.size(); j++)
