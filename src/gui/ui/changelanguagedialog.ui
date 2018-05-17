@@ -27,67 +27,67 @@
       <widget class="QComboBox" name="ChangeLangComboBox">
         <item>
           <property name="text">
-            <string>English</string>
+            <string>English 100%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Czech</string>
+            <string>Czech 9%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Deutsch</string>
+            <string>German 18%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Pirate English</string>
+            <string>Pirate English 18%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Español</string>
+            <string>Spanish 100%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Français</string>
+            <string>French 100%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Indonesian</string>
+            <string>Indonesian 32%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Italian</string>
+            <string>Italian 14%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Kabyle</string>
+            <string>Kabyle 19%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Português</string>
+            <string>Portuguese-BR 100%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Russian</string>
+            <string>Russian 100%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Vietnamese</string>
+            <string>Vietnamese 5%</string>
           </property>
         </item>
         <item>
           <property name="text">
-            <string>Chinese Simplified</string>
+            <string>Chinese Simplified 100%</string>
           </property>
         </item>
       </widget>
