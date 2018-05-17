@@ -104,7 +104,9 @@ void Settings::load() {
   }
 
   QStringList defaultNodesList;
-  defaultNodesList << "71.99.78.76:44043" << "132.148.90.225:44043";
+  defaultNodesList
+      << "node1.brazukcoin.org:44043"
+      << "node2.brazukcoin.org:44043";
   if (!m_settings.contains(OPTION_RPCNODES)) {
     setRpcNodesList(QStringList() << defaultNodesList);
   } else {
