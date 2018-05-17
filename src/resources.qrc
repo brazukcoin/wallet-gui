@@ -59,6 +59,8 @@
         <file>languages/qt_en-PT.qm</file>
         <file>languages/es-ES.qm</file>
         <file>languages/qt_es-ES.qm</file>
+        <file>languages/fr.qm</file>
+        <file>languages/qt_fr.qm</file>
         <file>languages/id.qm</file>
         <file>languages/qt_id.qm</file>
         <file>languages/it.qm</file>
