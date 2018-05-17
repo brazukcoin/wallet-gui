@@ -1,3 +1,13 @@
+
+Changelog:
+
+V.1.5.1
+
+- Fix LWMA implementation bug
+- Fix IGD port mapping error
+- The news of my death has been greatly exaggerated!
+- 12 new languages translated (5 of them completed, the rest in progress).
+
 V.1.5.0
 
 - New Zawy's LWMA difficulty algorithm.

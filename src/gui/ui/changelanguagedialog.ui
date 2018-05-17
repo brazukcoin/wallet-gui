@@ -1,52 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ChangeLanguageDialog</class>
- <widget class="QDialog" name="ChangeLanguageDialog">
-  <property name="geometry">
-   <rect>
+<class>ChangeLanguageDialog</class>
+<widget class="QDialog" name="ChangeLanguageDialog">
+<property name="geometry">
+  <rect>
     <x>0</x>
     <y>0</y>
     <width>245</width>
     <height>92</height>
-   </rect>
-  </property>
-  <property name="windowTitle">
-   <string>Change language</string>
-  </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
+  </rect>
+</property>
+<property name="windowTitle">
+  <string>Change language</string>
+</property>
+<layout class="QVBoxLayout" name="verticalLayout">
+  <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
+    <item>
       <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Select language:</string>
-       </property>
+        <property name="text">
+          <string>Select language:</string>
+        </property>
       </widget>
-     </item>
-     <item>
+    </item>
+    <item>
       <widget class="QComboBox" name="ChangeLangComboBox">
-       <item>
-        <property name="text">
-         <string>English</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Français</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Português</string>
-        </property>
-       </item>
+        <item>
+          <property name="text">
+            <string>English 100%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Czech 9%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>German 18%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Pirate English 18%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Spanish 100%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>French 100%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Indonesian 32%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Italian 14%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Kabyle 19%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Portuguese-BR 100%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Russian 100%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Vietnamese 5%</string>
+          </property>
+        </item>
+        <item>
+          <property name="text">
+            <string>Chinese Simplified 100%</string>
+          </property>
+        </item>
       </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
+    </item>
+  </layout>
+</item>
+<item>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
