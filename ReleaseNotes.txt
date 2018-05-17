@@ -5,6 +5,7 @@ V.1.5.1
 
 - Fix LWMA implementation bug
 - Fix IGD port mapping error
+- The news of my death has been greatly exaggerated!
 
 V.1.5.0
 
