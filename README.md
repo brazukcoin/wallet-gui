@@ -1,5 +1,6 @@
 
-![Image of Brazukcoin New GUI Wallet](https://i.imgur.com/fFoTr8y.png)
+![Image of Brazukcoin New GUI Wallet](https://i.imgur.com/kD1MW4c.png)
+
 
 
 ### How To Compile for Linux (Windows and Mac instructions soon)
@@ -10,8 +11,15 @@
 - You will need the following packages: boost (1.58 or higher), QT Library (5.9.0 orhigher) cmake, git, gcc (4.9 or higher), g++ (4.9 or higher), make. Most of these should already be installed on your system.
 
 - For example on ubuntu:
--- `sudo apt-get update`
--- `sudo apt-get install build-essential qtbase5-dev gcc g++ git cmake libboost-all-dev`
+
+```
+sudo apt-get update
+```
+
+```
+sudo apt-get install build-essential qtbase5-dev gcc g++ git cmake libboost-all-dev
+```
+
 
 - After this you can compile Brazukcoin.
 
@@ -27,7 +35,6 @@ git clone https://github.com/brazukcoin/wallet-gui.git
 
 ```
 $ cd wallet-gui
-$ git submodule add --force https://github.com/brazukcoin/wallet.git cryptonote
 $ git submodule update --init
 $ git submodule foreach git pull origin master
 ```
