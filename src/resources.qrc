@@ -51,10 +51,28 @@
         <file>default.qss</file>
     </qresource>
     <qresource prefix="/">
-        <file>languages/fr_FR.qm</file>
-        <file>languages/qt_fr_FR.qm</file>
-        <file>languages/pt_BR.qm</file>
-        <file>languages/qt_pt_BR.qm</file>
+        <file>languages/cz.qm</file>
+        <file>languages/qt_cz.qm</file>
+        <file>languages/de.qm</file>
+        <file>languages/qt_de.qm</file>
+        <file>languages/en-PT.qm</file>
+        <file>languages/qt_en-PT.qm</file>
+        <file>languages/es-ES.qm</file>
+        <file>languages/qt_es-ES.qm</file>
+        <file>languages/id.qm</file>
+        <file>languages/qt_id.qm</file>
+        <file>languages/it.qm</file>
+        <file>languages/qt_it.qm</file>
+        <file>languages/kab.qm</file>
+        <file>languages/qt_kab.qm</file>
+        <file>languages/pt-BR.qm</file>
+        <file>languages/qt_pt-BR.qm</file>
+        <file>languages/ru.qm</file>
+        <file>languages/qt_ru.qm</file>
+        <file>languages/vi.qm</file>
+        <file>languages/qt_vi.qm</file>
+        <file>languages/zh-CN.qm</file>
+        <file>languages/qt_zh-CN.qm</file>
     </qresource>
     <qresource prefix="/fonts">
         <file alias="mplusm">fonts/mplus-1m-medium.ttf</file>

@@ -543,7 +543,11 @@ void MainWindow::ChangeLanguage() {
   if (dlg.exec() == QDialog::Accepted) {
     QString language = dlg.getLang();
     Settings::instance().setLanguage((language));
-    QMessageBox::information(this, tr("Language was changed"), tr("The language will be changed after restarting the wallet."), QMessageBox::Ok);
+    QMessageBox::information(
+        this,
+        tr("Language was changed"),
+        tr("The language will be changed after restarting the wallet."),
+        QMessageBox::Ok);
   }
 }
 
