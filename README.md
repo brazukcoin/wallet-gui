@@ -12,9 +12,13 @@
 
 - For example on ubuntu:
 
-`sudo apt-get update`
+```
+sudo apt-get update
+```
 
-`sudo apt-get install build-essential qtbase5-dev gcc g++ git cmake libboost-all-dev`
+```
+sudo apt-get install build-essential qtbase5-dev gcc g++ git cmake libboost-all-dev
+```
 
 
 - After this you can compile Brazukcoin.
@@ -32,7 +36,6 @@ git clone https://github.com/brazukcoin/wallet-gui.git
 ```
 $ cd wallet-gui
 $ git submodule update --init
-$ git submodule add --force https://github.com/brazukcoin/wallet.git cryptonote
 $ git submodule foreach git pull origin master
 ```
 
