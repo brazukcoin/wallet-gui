@@ -1,5 +1,5 @@
 
-![Image of Brazukcoin New GUI Wallet](https://i.imgur.com/OiGPGPA.png)
+![Image of Brazukcoin New GUI Wallet](https://i.imgur.com/kD1MW4c.png)
 
 
 
