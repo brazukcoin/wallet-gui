@@ -399,7 +399,7 @@ public:
   }
 
   CryptoNote::IWalletLegacy* createWallet() override {
-    return new CryptoNote::WalletLegacy(m_currency, m_node/*, m_logManager*/);
+    return new CryptoNote::WalletLegacy(m_currency, m_node, m_logManager);
   }
 
 private:
@@ -552,7 +552,7 @@ public:
   }
 
   CryptoNote::IWalletLegacy* createWallet() override {
-    return new CryptoNote::WalletLegacy(m_currency, m_node/*, m_logManager*/);
+    return new CryptoNote::WalletLegacy(m_currency, m_node, m_logManager);
   }
 
 private:

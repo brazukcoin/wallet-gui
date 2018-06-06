@@ -13,6 +13,10 @@ if(POLICY CMP0043)
   cmake_policy(SET CMP0043 NEW)
 endif()
 
+if(POLICY CMP0020)
+  cmake_policy(SET CMP0020 NEW)
+endif()
+
 execute_process(COMMAND git log -1 --pretty=format:%h
 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 OUTPUT_VARIABLE GIT_REVISION)
