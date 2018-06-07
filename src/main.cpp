@@ -3,15 +3,18 @@
 // Copyright (c) 2017-2018 The Brazukcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QLocale>
-#include <QTranslator>
 #include <QLockFile>
 #include <QMessageBox>
 #include <QSplashScreen>
 #include <QStyleFactory>
+#include <QTextCodec>
+#include <QTranslator>
 
+#include "gui/MainWindow.h"
 #include "CommandLineParser.h"
 #include "CurrencyAdapter.h"
 #include "LoggerAdapter.h"
@@ -19,17 +22,15 @@
 #include "Settings.h"
 #include "SignalHandler.h"
 #include "WalletAdapter.h"
-#include "gui/MainWindow.h"
-#include "Update.h"
-#include <QTextCodec>
 #include "PaymentServer.h"
+#include "Update.h"
 
 #define DEBUG 1
 
-using namespace WalletGui;
+// using namespace WalletGui;
 
-int main(int argc, char* argv[]) {
-
+int main(int argc, char* argv[])
+{
   QApplication app(argc, argv);
   app.setApplicationName(CurrencyAdapter::instance().getCurrencyName() + "wallet");
   app.setApplicationVersion(Settings::instance().getVersion());
@@ -39,14 +40,13 @@ int main(int argc, char* argv[]) {
     QApplication::setStyle(QStyleFactory::create("Fusion"));
   #endif
 
-  CommandLineParser cmdLineParser(nullptr);
-  Settings::instance().setCommandLineParser(&cmdLineParser);
+  WalletGui::CommandLineParser cmdLineParser(nullptr);
+  WalletGui::Settings::instance().setCommandLineParser(&cmdLineParser);
   bool cmdLineParseResult = cmdLineParser.process(app.arguments());
-  Settings::instance().load();
+  WalletGui::Settings::instance().load();
   QTranslator translator;
   QTranslator translatorQt;
-
-  QString lng = Settings::instance().getLanguage();
+  QString lng = WalletGui::Settings::instance().getLanguage();
 
   if(!lng.isEmpty()) {
     translator.load(":/languages/" + lng + ".qm");

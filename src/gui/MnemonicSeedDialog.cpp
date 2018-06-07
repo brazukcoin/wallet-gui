@@ -11,12 +11,23 @@
 
 namespace WalletGui {
 
-MnemonicSeedDialog::MnemonicSeedDialog(QWidget* _parent) : QDialog(_parent), m_ui(new Ui::MnemonicSeedDialog) {
+MnemonicSeedDialog::MnemonicSeedDialog(QWidget* _parent) : QDialog(_parent),
+                                                           m_ui(new Ui::MnemonicSeedDialog)
+{
   m_ui->setupUi(this);
-  connect(&WalletAdapter::instance(), &WalletAdapter::walletInitCompletedSignal, this, &MnemonicSeedDialog::walletOpened, Qt::QueuedConnection);
-  connect(&WalletAdapter::instance(), &WalletAdapter::walletCloseCompletedSignal, this, &MnemonicSeedDialog::walletClosed, Qt::QueuedConnection);
+  connect(&WalletAdapter::instance(),
+          &WalletAdapter::walletInitCompletedSignal,
+          this,
+          &MnemonicSeedDialog::walletOpened,
+          Qt::QueuedConnection);
+  connect(&WalletAdapter::instance(),
+          &WalletAdapter::walletCloseCompletedSignal,
+          this,
+          &MnemonicSeedDialog::walletClosed,
+          Qt::QueuedConnection);
   initLanguages();
-  m_ui->m_languageCombo->setCurrentIndex(m_ui->m_languageCombo->findData(getLanguageName(), Qt::DisplayRole));
+  m_ui->m_languageCombo->setCurrentIndex(m_ui->m_languageCombo->findData(getLanguageName(),
+                                         Qt::DisplayRole));
 }
 
 MnemonicSeedDialog::~MnemonicSeedDialog() {}

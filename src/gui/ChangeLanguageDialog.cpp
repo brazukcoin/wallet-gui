@@ -9,20 +9,18 @@
 #include "ui_changelanguagedialog.h"
 
 namespace WalletGui {
-
-ChangeLanguageDialog::ChangeLanguageDialog(QWidget* _parent)
-    : QDialog(_parent), m_ui(new Ui::ChangeLanguageDialog) {
+ChangeLanguageDialog::ChangeLanguageDialog(QWidget* _parent) : QDialog(_parent),
+                                                               m_ui(new Ui::ChangeLanguageDialog)
+{
   m_ui->setupUi(this);
 }
-
 ChangeLanguageDialog::~ChangeLanguageDialog() {}
 
-void ChangeLanguageDialog::initLangList() {
-  
+void ChangeLanguageDialog::initLangList()
+{  
   QString currentlang = Settings::instance().getLanguage();
-
   int index = 0;
-
+  
   if (currentlang.compare("cs") == 0) {
     index = 1;
   }
@@ -62,14 +60,13 @@ void ChangeLanguageDialog::initLangList() {
   else {
     index = 0;
   }
-
+  
   m_ui->ChangeLangComboBox->setCurrentIndex(index);
 }
 
-QString ChangeLanguageDialog::getLang() const {
-
-  QString lang;
-    
+QString ChangeLanguageDialog::getLang() const
+{
+  QString lang;   
   int index = m_ui->ChangeLangComboBox->currentIndex();
 
   if (index == 1) {
@@ -114,5 +111,4 @@ QString ChangeLanguageDialog::getLang() const {
 
   return lang;
 }
-
 }  // namespace WalletGui
