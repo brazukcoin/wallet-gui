@@ -5,8 +5,8 @@
 ** file COPYING or http://www.opensource.org/licenses/mit-license.php.
 */
 
-#ifndef WALLET-GUI_GUI_CHANGELANGUAGEDIALOG_H_
-#define WALLET-GUI_GUI_CHANGELANGUAGEDIALOG_H_
+#ifndef WALLETGUI_GUI_CHANGELANGUAGEDIALOG_H_
+#define WALLETGUI_GUI_CHANGELANGUAGEDIALOG_H_
 
 #pragma  once
 
@@ -32,4 +32,4 @@ class ChangeLanguageDialog : public QDialog {
 };
 }  // namespace WalletGui
 
-#endif  // WALLET-GUI_GUI_CHANGELANGUAGEDIALOG_H_
+#endif  // WALLETGUI_GUI_CHANGELANGUAGEDIALOG_H_
