@@ -35,9 +35,9 @@ int main(int argc, char* argv[]) {
   app.setApplicationVersion(Settings::instance().getVersion());
   app.setQuitOnLastWindowClosed(false);
 
-#ifndef Q_OS_MAC
-  QApplication::setStyle(QStyleFactory::create("Fusion"));
-#endif
+  #ifndef Q_OS_MAC
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
+  #endif
 
   CommandLineParser cmdLineParser(nullptr);
   Settings::instance().setCommandLineParser(&cmdLineParser);
@@ -52,11 +52,41 @@ int main(int argc, char* argv[]) {
     translator.load(":/languages/" + lng + ".qm");
     translatorQt.load(":/languages/qt_" + lng + ".qm");
 
-    if(lng == "fr_FR") {
-      QLocale::setDefault(QLocale("fr_FR"));
+    if(lng == "cz") {
+      QLocale::setDefault(QLocale("cz"));
     }
-    else if(lng == "pt_BR") {
-      QLocale::setDefault(QLocale("pt_BR"));
+    else if(lng == "de") {
+      QLocale::setDefault(QLocale("de"));
+    }
+    else if(lng == "en-PT") {
+      QLocale::setDefault(QLocale("en-PT"));
+    }
+    else if(lng == "es-ES") {
+      QLocale::setDefault(QLocale("es-ES"));
+    }
+    else if(lng == "fr") {
+      QLocale::setDefault(QLocale("fr"));
+    }
+    else if(lng == "id") {
+      QLocale::setDefault(QLocale("id"));
+    }
+    else if(lng == "it") {
+      QLocale::setDefault(QLocale("it"));
+    }
+    else if(lng == "kab") {
+      QLocale::setDefault(QLocale("kab"));
+    }
+    else if(lng == "pt-BR") {
+      QLocale::setDefault(QLocale("pt-BR"));
+    }
+    else if(lng == "ru") {
+      QLocale::setDefault(QLocale("ru"));
+    }
+    else if(lng == "vi") {
+      QLocale::setDefault(QLocale("vi"));
+    }
+    else if(lng == "zh-CN") {
+      QLocale::setDefault(QLocale("zh-CN"));
     }
     else {
       QLocale::setDefault(QLocale::c());
