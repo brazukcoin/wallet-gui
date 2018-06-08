@@ -3,13 +3,14 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include "Worker.h"
+
 #include <QDebug>
 #include <QReadWriteLock>
 #include <QThread>
 
 #include <crypto/hash.h>
 
-#include "Worker.h"
 
 namespace WalletGui {
 

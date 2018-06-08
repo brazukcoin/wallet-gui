@@ -6,44 +6,47 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include "MainWindow.h"
+
 #include <QCloseEvent>
+#include <QDateTime>
+#include <QDebug>
+#include <QDesktopServices>
 #include <QFileDialog>
+#include <QFontDatabase>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QPushButton>
 #include <QSystemTrayIcon>
-#include <QDesktopServices>
 #include <QTimer>
-#include <QDebug>
-#include <QDateTime>
-#include <QFontDatabase>
+#include <QToolButton>
+
 #include <Common/Base58.h>
 #include <Common/StringTools.h>
 #include <Common/Util.h>
-#include <QToolButton>
-#include <QPushButton>
+
 #include "AboutDialog.h"
 #include "AnimatedLabel.h"
-#include "ChangePasswordDialog.h"
 #include "ChangeLanguageDialog.h"
+#include "ChangePasswordDialog.h"
 #include "ConnectionSettings.h"
-#include "PrivateKeysDialog.h"
-#include "ExportTrackingKeyDialog.h"
-#include "ImportTrackingKeyDialog.h"
 #include "CurrencyAdapter.h"
 #include "ExitWidget.h"
+#include "ExportTrackingKeyDialog.h"
 #include "ImportKeyDialog.h"
-#include "RestoreFromMnemonicSeedDialog.h"
-#include "MainWindow.h"
+#include "ImportTrackingKeyDialog.h"
+#include "InfoDialog.h"
+#include "MnemonicSeedDialog.h"
 #include "NewPasswordDialog.h"
 #include "NodeAdapter.h"
 #include "PasswordDialog.h"
+#include "PrivateKeysDialog.h"
+#include "RestoreFromMnemonicSeedDialog.h"
+#include "SendFrame.h"
 #include "Settings.h"
+#include "ui_mainwindow.h"
 #include "WalletAdapter.h"
 #include "WalletEvents.h"
-#include "SendFrame.h"
-#include "InfoDialog.h"
-#include "ui_mainwindow.h"
-#include "MnemonicSeedDialog.h"
 
 #ifdef Q_OS_MAC
 #include "macdockiconhandler.h"
@@ -51,11 +54,11 @@
 
 #include "mnemonics/electrum-words.h"
 
-extern "C"
-{
+extern "C" {
 #include "crypto/keccak.h"
 #include "crypto/crypto-ops.h"
 }
+
 
 namespace WalletGui {
 
@@ -65,7 +68,6 @@ MainWindow& MainWindow::instance() {
   if (m_instance == nullptr) {
     m_instance = new MainWindow;
   }
-
   return *m_instance;
 }
 
@@ -187,11 +189,11 @@ void MainWindow::initUi() {
      m_ui->menuRecent_wallets->addAction(recentFileActionList.at(i));
   updateRecentActionList();
 
-#ifdef Q_OS_MAC
+  #ifdef Q_OS_MAC
   installDockHandler();
-#endif
+  #endif
 
-#ifdef Q_OS_WIN
+  #ifdef Q_OS_WIN
   m_ui->m_minimizeToTrayAction->setVisible(true);
   m_ui->m_closeToTrayAction->setVisible(true);
   m_ui->m_minimizeToTrayAction->setChecked(Settings::instance().isMinimizeToTrayEnabled());
@@ -199,12 +201,12 @@ void MainWindow::initUi() {
   toggleHideAction = new QAction(tr("&Show / Hide"), this);
   toggleHideAction->setStatusTip(tr("Show or hide the main window"));
   connect(toggleHideAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
-#endif
+  #endif
 
-#ifndef Q_OS_WIN
+  #ifndef Q_OS_WIN
   m_ui->m_minimizeToTrayAction->deleteLater();
   m_ui->m_closeToTrayAction->deleteLater();
-#endif
+  #endif
 
   createTrayIconMenu();
 
@@ -221,8 +223,9 @@ void MainWindow::quit() {
     ExitWidget* exitWidget = new ExitWidget(nullptr);
     exitWidget->show();
     m_isAboutToQuit = true;
-    if(m_trayIcon) // Hide tray icon, as deleting will let it linger until quit (on Ubuntu)
+    if(m_trayIcon) { // Hide tray icon, as deleting will let it linger until quit (on Ubuntu)
        m_trayIcon->hide();
+    }
     close();
   }
 }
@@ -763,14 +766,14 @@ void MainWindow::setStatusBarText(const QString& _text) {
 
 void MainWindow::showMessage(const QString& _text, QtMsgType _type) {
   switch (_type) {
-  case QtCriticalMsg:
-    QMessageBox::critical(this, tr("Wallet error"), _text);
-    break;
-  case QtDebugMsg:
-    QMessageBox::information(this, tr("Wallet"), _text);
-    break;
-  default:
-    break;
+    case QtCriticalMsg:
+      QMessageBox::critical(this, tr("Wallet error"), _text);
+      break;
+    case QtDebugMsg:
+      QMessageBox::information(this, tr("Wallet"), _text);
+      break;
+    default:
+      break;
   }
 }
 

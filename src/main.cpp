@@ -108,17 +108,17 @@ int main(int argc, char* argv[]) {
 
   setlocale(LC_ALL, "");
 
-  QFile File(":/skin/default.qss");
+  QFile File(":/themes/default");
   File.open(QFile::ReadOnly);
   QString StyleSheet = QLatin1String(File.readAll());
   qApp->setStyleSheet(StyleSheet);
 
-  if (PaymentServer::ipcSendCommandLine())
-  exit(0);
-
+  if (PaymentServer::ipcSendCommandLine()) {
+    exit(0);
+  }
   PaymentServer* paymentServer = new PaymentServer(&app);
 
-#ifdef Q_OS_WIN
+  #ifdef Q_OS_WIN
   if(!cmdLineParseResult) {
     QMessageBox::critical(nullptr, QObject::tr("Error"), cmdLineParser.getErrorText());
     return app.exec();
@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) {
     QMessageBox::information(nullptr, QObject::tr("Help"), cmdLineParser.getHelpText());
     return app.exec();
   }
-#endif
+  #endif
 
   LoggerAdapter::instance().init();
 

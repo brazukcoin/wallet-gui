@@ -47,8 +47,8 @@
         <file alias="clock">images/clock.gif</file>
         <file alias="handle.png">images/handle.png</file>
     </qresource>
-    <qresource prefix="/skin">
-        <file>default.qss</file>
+    <qresource prefix="/themes">
+        <file alias="default">themes/default.qss</file>
     </qresource>
     <qresource prefix="/">
         <file>languages/cz.qm</file>

@@ -373,30 +373,28 @@ void WalletAdapter::initCompleted(std::error_code _error) {
 
 void WalletAdapter::onWalletInitCompleted(int _error, const QString& _errorText) {
   switch(_error) {
-  case 0: {
-    Q_EMIT walletActualBalanceUpdatedSignal(m_wallet->actualBalance());
-    Q_EMIT walletPendingBalanceUpdatedSignal(m_wallet->pendingBalance());
-    Q_EMIT updateWalletAddressSignal(QString::fromStdString(m_wallet->getAddress()));
-    Q_EMIT reloadWalletTransactionsSignal();
-    Q_EMIT walletStateChangedSignal(tr("Ready"));
-    QTimer::singleShot(5000, this, SLOT(updateBlockStatusText()));
-    if (!QFile::exists(Settings::instance().getWalletFile())) {
-      save(true, true);
+    case 0: {
+      Q_EMIT walletActualBalanceUpdatedSignal(m_wallet->actualBalance());
+      Q_EMIT walletPendingBalanceUpdatedSignal(m_wallet->pendingBalance());
+      Q_EMIT updateWalletAddressSignal(QString::fromStdString(m_wallet->getAddress()));
+      Q_EMIT reloadWalletTransactionsSignal();
+      Q_EMIT walletStateChangedSignal(tr("Ready"));
+      QTimer::singleShot(5000, this, SLOT(updateBlockStatusText()));
+      if (!QFile::exists(Settings::instance().getWalletFile())) {
+        save(true, true);
+      }
+      break;
     }
-
-    break;
-  }
-  case CryptoNote::error::WRONG_PASSWORD:
-    Q_EMIT openWalletWithPasswordSignal(Settings::instance().isEncrypted());
-    Settings::instance().setEncrypted(true);
-    delete m_wallet;
-    m_wallet = nullptr;
-    break;
-  default: {
-    delete m_wallet;
-    m_wallet = nullptr;
-    break;
-  }
+    case CryptoNote::error::WRONG_PASSWORD:
+      Q_EMIT openWalletWithPasswordSignal(Settings::instance().isEncrypted());
+      Settings::instance().setEncrypted(true);
+      delete m_wallet;
+      m_wallet = nullptr;
+      break;
+    default: {
+      delete m_wallet;
+      m_wallet = nullptr;
+    }
   }
 }
 
@@ -406,10 +404,12 @@ void WalletAdapter::saveCompleted(std::error_code _error) {
     renameFile(Settings::instance().getWalletFile() + ".temp", Settings::instance().getWalletFile());
     Q_EMIT walletStateChangedSignal(tr("Ready"));
     Q_EMIT updateBlockStatusTextWithDelaySignal();
-  } else if (m_isBackupInProgress) {
+  }
+  else if (m_isBackupInProgress) {
     m_isBackupInProgress = false;
     closeFile();
-  } else {
+  }
+  else {
     closeFile();
   }
 
