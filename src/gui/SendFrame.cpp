@@ -27,7 +27,7 @@
 #include "WalletAdapter.h"
 #include "WalletEvents.h"
 
-//#include "ui_sendframe.h"  // FIX-ME?
+#include "ui_sendframe.h"
 
 
 namespace WalletGui {
