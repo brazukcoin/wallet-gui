@@ -103,14 +103,17 @@ Node::~Node() {
 }
 
 class RpcNode : CryptoNote::INodeObserver, public Node {
-public:
+ public:
   Logging::LoggerManager& m_logManager;
-  RpcNode(const CryptoNote::Currency& currency, INodeCallback& callback, Logging::LoggerManager& logManager, const std::string& nodeHost, unsigned short nodePort) :
-    m_callback(callback),
-    m_currency(currency),
-    m_dispatcher(),
-    m_logManager(logManager),
-    m_node(nodeHost, nodePort) {
+  RpcNode(const CryptoNote::Currency& currency,
+          INodeCallback& callback,
+          Logging::LoggerManager& logManager,
+          const std::string& nodeHost,
+          unsigned short nodePort) : m_callback(callback),
+                                     m_currency(currency),
+                                     m_dispatcher(),
+                                     m_logManager(logManager),
+                                     m_node(nodeHost, nodePort) {
     m_node.addObserver(this);
   }
 
@@ -137,43 +140,50 @@ public:
     req.threads_count = threads_count;
 
     try {
-        //CryptoNote::HttpClient httpClient(m_dispatcher, "127.0.0.1", Settings::instance().getCurrentLocalDaemonPort());
-        CryptoNote::HttpClient httpClient(m_dispatcher, m_node.m_nodeHost, m_node.m_nodePort);
+      //CryptoNote::HttpClient httpClient(m_dispatcher, "127.0.0.1", Settings::instance().getCurrentLocalDaemonPort());
+      CryptoNote::HttpClient httpClient(m_dispatcher, m_node.m_nodeHost, m_node.m_nodePort);
 
-        CryptoNote::invokeJsonCommand(httpClient, "/start_mining", req, res);
+      CryptoNote::invokeJsonCommand(httpClient, "/start_mining", req, res);
 
-        std::string err = interpret_rpc_response(true, res.status);
-        if (err.empty())
-          qDebug() << "Mining started in daemon";
-        else
-          qDebug() << "Mining has NOT been started: " << QString::fromStdString(err);
-
-      } catch (const CryptoNote::ConnectException&) {
-        qDebug() << "Wallet failed to connect to daemon.";
-      } catch (const std::exception& e) {
-        qDebug() << "Failed to invoke rpc method: " << e.what();
+      std::string err = interpret_rpc_response(true, res.status);
+      if (err.empty()) {
+        qDebug() << "Mining started in daemon";
       }
+      else {
+        qDebug() << "Mining has NOT been started: " << QString::fromStdString(err);
+      }
+    }
+    catch (const CryptoNote::ConnectException&) {
+      qDebug() << "Wallet failed to connect to daemon.";
+    }
+    catch (const std::exception& e) {
+      qDebug() << "Failed to invoke rpc method: " << e.what();
+    }
   }
 
   void stopMining() override {
-      CryptoNote::COMMAND_RPC_STOP_MINING::request req;
-      CryptoNote::COMMAND_RPC_STOP_MINING::response res;
+    CryptoNote::COMMAND_RPC_STOP_MINING::request req;
+    CryptoNote::COMMAND_RPC_STOP_MINING::response res;
 
-      try {
-         //CryptoNote::HttpClient httpClient(m_dispatcher, "127.0.0.1", Settings::instance().getCurrentLocalDaemonPort());
-         CryptoNote::HttpClient httpClient(m_dispatcher, m_node.m_nodeHost, m_node.m_nodePort);
+    try {
+      //CryptoNote::HttpClient httpClient(m_dispatcher, "127.0.0.1", Settings::instance().getCurrentLocalDaemonPort());
+      CryptoNote::HttpClient httpClient(m_dispatcher, m_node.m_nodeHost, m_node.m_nodePort);
 
-          CryptoNote::invokeJsonCommand(httpClient, "/stop_mining", req, res);
-          std::string err = interpret_rpc_response(true, res.status);
-          if (err.empty())
-            qDebug() << "Mining stopped in daemon";
-          else
-            qDebug() << "Mining has NOT been stopped: " << QString::fromStdString(err);
-        } catch (const CryptoNote::ConnectException&) {
-          qDebug() << "Wallet failed to connect to daemon.";
-        } catch (const std::exception& e) {
-          qDebug() << "Failed to invoke rpc method: " << e.what();
-        }
+      CryptoNote::invokeJsonCommand(httpClient, "/stop_mining", req, res);
+      std::string err = interpret_rpc_response(true, res.status);
+      if (err.empty()) {
+        qDebug() << "Mining stopped in daemon";
+      }
+      else {
+        qDebug() << "Mining has NOT been stopped: " << QString::fromStdString(err);
+      }
+    }
+    catch (const CryptoNote::ConnectException&) {
+      qDebug() << "Wallet failed to connect to daemon.";
+    }
+    catch (const std::exception& e) {
+      qDebug() << "Failed to invoke rpc method: " << e.what();
+    }
   }
 
   std::string convertPaymentId(const std::string& paymentIdString) override {
@@ -196,11 +206,11 @@ public:
     return m_node.getLastLocalBlockTimestamp();
   }
 
-  uint64_t getPeerCount() override{
+  uint64_t getPeerCount() override {
     return m_node.getPeerCount();
   }
 
-  uint64_t getDifficulty() override{
+  uint64_t getDifficulty() override {
     try {
         CryptoNote::COMMAND_RPC_GET_INFO::request req;
         CryptoNote::COMMAND_RPC_GET_INFO::response res;
@@ -222,7 +232,7 @@ public:
       }
   }
 
-  uint64_t getTxCount() override{
+  uint64_t getTxCount() override {
       try {
           CryptoNote::COMMAND_RPC_GET_INFO::request req;
           CryptoNote::COMMAND_RPC_GET_INFO::response res;

@@ -9,11 +9,12 @@
 
 #include "CryptoNoteCore/Currency.h"
 
+
 namespace WalletGui {
 
 class CurrencyAdapter {
 
-public:
+ public:
   static CurrencyAdapter& instance();
 
   const CryptoNote::Currency& getCurrency();
@@ -29,11 +30,10 @@ public:
   QString generatePaymentId() const;
   CryptoNote::AccountPublicAddress internalAddress(const QString& _address) const;
 
-private:
+ private:
   CryptoNote::Currency m_currency;
 
   CurrencyAdapter();
   ~CurrencyAdapter();
 };
-
-}
+}  // namespace WalletGui

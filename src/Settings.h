@@ -9,6 +9,7 @@
 #include <QJsonObject>
 #include <QObject>
 
+
 namespace WalletGui {
 
 class CommandLineParser;
@@ -17,7 +18,7 @@ class Settings : public QObject {
   Q_OBJECT
   Q_DISABLE_COPY(Settings)
 
-public:
+ public:
   static Settings& instance();
 
   void setCommandLineParser(CommandLineParser* _cmd_line_parser);
@@ -54,10 +55,10 @@ public:
   bool isMiningOnLaunchEnabled() const;
   bool isTrackingMode() const;
 
-#ifdef Q_OS_WIN
+  #ifdef Q_OS_WIN
   bool isMinimizeToTrayEnabled() const;
   bool isCloseToTrayEnabled() const;
-#endif
+  #endif
 
   void setWalletFile(const QString& _file);
   void setEncrypted(bool _encrypted);
@@ -73,12 +74,12 @@ public:
   void setRpcNodesList(const QStringList& _RpcNodesList);
   void setCurrentPool(const QString& _pool);
   void setMiningThreads(const quint16& _threads);
-#ifdef Q_OS_WIN
+  #ifdef Q_OS_WIN
   void setMinimizeToTrayEnabled(bool _enable);
   void setCloseToTrayEnabled(bool _enable);
-#endif
+  #endif
 
-private:
+ private:
   QJsonObject m_settings;
   QString m_addressBookFile;
   QString m_currentLang;
@@ -91,5 +92,4 @@ private:
 
   void saveSettings() const;
 };
-
-}
+}  // namespace WalletGui
