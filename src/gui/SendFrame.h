@@ -5,6 +5,7 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+
 #pragma once
 
 #include <QFrame>
@@ -12,9 +13,10 @@
 #include <IWallet.h>
 #include <IWalletLegacy.h>
 
+
 namespace Ui {
-  class SendFrame;
-}
+class SendFrame;
+}  // namespace Ui
 
 namespace WalletGui {
 
@@ -25,13 +27,13 @@ class SendFrame : public QFrame {
   Q_OBJECT
   Q_DISABLE_COPY(SendFrame)
 
-public:
+ public:
   SendFrame(QWidget* _parent);
   ~SendFrame();
 
   Q_SLOT void parsePaymentRequest(QString _request);
 
-private:
+ private:
   QScopedPointer<Ui::SendFrame> m_ui;
   QList<TransferFrame*> m_transfers;
   AddressProvider* m_addressProvider;
@@ -55,9 +57,6 @@ private:
   Q_SLOT void openUriClicked();
   Q_SLOT void generatePaymentIdClicked();
 
-Q_SIGNALS:
-  void uriOpenSignal();
-
+  Q_SIGNALS: void uriOpenSignal();
 };
-
-}
+}  // namespace WalletGui

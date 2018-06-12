@@ -20,7 +20,7 @@ public:
   ConfirmSendDialog(QWidget* _parent);
   ~ConfirmSendDialog();
 
-  void showPasymentDetails(quint64 _total);
+  void showPaymentDetails(quint64 _total);
   void showPaymentId(QString _paymentid);
   void confirmNoPaymentId();
 
